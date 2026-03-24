@@ -19,7 +19,7 @@ const Hero = () => {
         <Button
           variant={theme === "dark" ? "secondary" : "default"}
           size={"lg"}
-          className="text-black dark:text-white overflow-hidden group hover:dark:bg-white hover:dark:text-black"
+          className=" overflow-hidden group "
         >
           Get Started
           <span className="relative w-4 h-4">

@@ -235,7 +235,7 @@ const Navbar = () => {
         <Button variant={"ghost"}>Log in</Button>
         <Button
           variant={theme === "dark" ? "secondary" : "default"}
-          className="text-black dark:text-white overflow-hidden group"
+          className="overflow-hidden group"
         >
           Get Started
           <span className="relative w-4 h-4">
