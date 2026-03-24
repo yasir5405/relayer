@@ -12,11 +12,7 @@ import { DottedGlowBackground } from "../Backgrounds/DottedGlowBackground";
 import { BackgroundBeamsWithCollision } from "../Backgrounds/background-beams-with-collision";
 import { ThemeSwitcher } from "../ThemeSwitcher";
 import { useTheme } from "@/context/ThemeProvider";
-import {
-  IconArrowRight,
-  IconChevronRight,
-  IconChevronsRight,
-} from "@tabler/icons-react";
+import { IconArrowRight, IconChevronRight } from "@tabler/icons-react";
 import { Separator } from "../ui/separator";
 
 const Navbar = () => {
@@ -135,7 +131,7 @@ const Navbar = () => {
                     <ul className="flex flex-col gap-3">
                       {section.items.map((item) => (
                         <Link to={item.href} key={item.name} className="group">
-                          <p className="text-xs flex items-center gap-1 font-medium group-hover:text-primary/90">
+                          <p className="text-xs flex items-center gap-1 font-medium group-hover:text-primary">
                             {item.name}
 
                             <IconArrowRight className="opacity-0 -translate-x-1 transition-all duration-200 ease-in-out group-hover:translate-x-0 group-hover:opacity-100 size-3.5" />
@@ -165,7 +161,7 @@ const Navbar = () => {
                       <Link
                         to={product.href}
                         key={product.name}
-                        className="text-muted-foreground hover:text-accent-foreground transition-all duration-150 ease-in text-sm"
+                        className="text-muted-foreground hover:text-primary dark:hover:text-white transition-all duration-150 ease-in text-sm"
                       >
                         {product.name}
                       </Link>
@@ -175,14 +171,14 @@ const Navbar = () => {
 
                 {/* Right Div */}
                 <div className="flex gap-2 w-full">
-                  <div className="w-1/2 h-full border rounded-md relative cursor-pointer overflow-hidden">
+                  <div className="w-1/2 h-full border rounded-md relative cursor-pointer overflow-hidden dark:hover:border-primary hover:border-primary transition-all duration-200 ease-in-out">
                     <BackgroundBeamsWithCollision className="w-full flex-col p-4">
                       <h1 className="leading-5 text-sm font-semibold dark:text-white">
                         JWT Decoder <br /> & Inspector{" "}
                       </h1>
                     </BackgroundBeamsWithCollision>
                   </div>
-                  <div className="w-1/2 h-full border rounded-md relative cursor-pointer hover:bg-background/90 p-4">
+                  <div className="w-1/2 h-full border rounded-md relative cursor-pointer hover:bg-background/90 dark:hover:border-primary hover:border-primary p-4  transition-all duration-200 ease-in-out">
                     <h1 className="leading-5 text-sm font-semibold dark:text-white">
                       API Request <br /> Tester{" "}
                     </h1>
@@ -214,13 +210,13 @@ const Navbar = () => {
             <NavigationMenuContent className="p-4 bg-background">
               <div className="h-full flex min-w-100 gap-2">
                 <ul className="flex flex-col gap-3">
-                  {company.map((product) => (
+                  {company.map((company) => (
                     <Link
-                      to={product.href}
-                      key={product.name}
-                      className="text-muted-foreground hover:text-accent-foreground transition-all duration-150 ease-in text-sm"
+                      to={company.href}
+                      key={company.name}
+                      className="text-muted-foreground hover:text-primary dark:hover:text-white transition-all duration-150 ease-in text-sm"
                     >
-                      {product.name}
+                      {company.name}
                     </Link>
                   ))}
                 </ul>
@@ -240,9 +236,9 @@ const Navbar = () => {
           Get Started
           <span className="relative w-4 h-4">
             {/* Current icon - slides out */}
-            <IconChevronRight className="absolute inset-0 transition-all duration-200 ease-in-out group-hover:translate-x-4 group-hover:opacity-0" />
+            <IconChevronRight className="absolute inset-0 transition-all duration-200 ease-in-out group-hover:translate-x-4 group-hover:opacity-0 size-3.5" />
             {/* New icon - slides in */}
-            <IconChevronsRight className="absolute inset-0 opacity-0 -translate-x-4 transition-all duration-200 ease-in-out group-hover:translate-x-0 group-hover:opacity-100" />
+            <IconArrowRight className="absolute inset-0 opacity-0 -translate-x-4 transition-all duration-200 ease-in-out group-hover:translate-x-0 group-hover:opacity-100 size-3.5" />
           </span>
         </Button>
       </div>

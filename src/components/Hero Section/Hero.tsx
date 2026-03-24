@@ -1,6 +1,6 @@
 import { useTheme } from "@/context/ThemeProvider";
 import { Button } from "../ui/button";
-import { IconChevronRight, IconChevronsRight } from "@tabler/icons-react";
+import { IconArrowRight, IconChevronRight } from "@tabler/icons-react";
 
 const Hero = () => {
   const { theme } = useTheme();
@@ -19,14 +19,14 @@ const Hero = () => {
         <Button
           variant={theme === "dark" ? "secondary" : "default"}
           size={"lg"}
-          className=" overflow-hidden group "
+          className=" overflow-hidden group p-6 font-semibold"
         >
           Get Started
           <span className="relative w-4 h-4">
             {/* Current icon - slides out */}
-            <IconChevronRight className="absolute inset-0 transition-all duration-200 ease-in-out group-hover:translate-x-4 group-hover:opacity-0" />
+            <IconChevronRight className="absolute inset-0 transition-all duration-200 ease-in-out group-hover:translate-x-4 group-hover:opacity-0 size-3.5" />
             {/* New icon - slides in */}
-            <IconChevronsRight className="absolute inset-0 opacity-0 -translate-x-4 transition-all duration-200 ease-in-out group-hover:translate-x-0 group-hover:opacity-100" />
+            <IconArrowRight className="absolute inset-0 opacity-0 -translate-x-4 transition-all duration-200 ease-in-out group-hover:translate-x-0 group-hover:opacity-100 size-3.5" />
           </span>
         </Button>
       </div>
