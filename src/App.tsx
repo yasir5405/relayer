@@ -1,8 +1,13 @@
+import { Route, Routes } from "react-router-dom";
+import LandingLayout from "./layouts/LandingLayout";
+import { Home } from "./pages";
 const App = () => {
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-    </div>
+    <Routes>
+      <Route element={<LandingLayout />}>
+        <Route path="/" element={<Home />} />
+      </Route>
+    </Routes>
   );
 };
 
