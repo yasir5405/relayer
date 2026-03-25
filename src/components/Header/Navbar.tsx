@@ -4,107 +4,30 @@ import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
+  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
 } from "../ui/navigation-menu";
 import { Button } from "../ui/button";
-import { DottedGlowBackground } from "../Backgrounds/DottedGlowBackground";
-import { BackgroundBeamsWithCollision } from "../Backgrounds/background-beams-with-collision";
-import { ThemeSwitcher } from "../ThemeSwitcher";
-import { useTheme } from "@/context/ThemeProvider";
-import { IconArrowRight, IconChevronRight } from "@tabler/icons-react";
-import { Separator } from "../ui/separator";
+import { IconArrowRight } from "@tabler/icons-react";
+import { motion } from "motion/react";
+import { InteractiveHoverButton } from "../ui/interactive-hover-button";
+import {
+  companySections,
+  productSections,
+  resourcesSections,
+  toolsSections,
+} from "@/constants/constants";
+import { useState } from "react";
+import { AnimatedThemeToggler } from "../ui/animated-theme-toggler";
+import { GlareCard } from "../ui/glare-card";
 
 const Navbar = () => {
-  const tools: { name: string; href: string }[] = [
-    { name: "Json Formatter", href: "/tools/json-formatter" },
-    { name: "Base64 Encoder/Decoder", href: "/tools/base64" },
-    {
-      name: "JSON to TypeScript Schema Generator",
-      href: "/tools/schema-generator",
-    },
-    {
-      name: "Regex Tester",
-      href: "/tools/regex-tester",
-    },
-    {
-      name: "Hash Generator",
-      href: "/tools/hash-generator",
-    },
-  ];
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  const company: { name: string; href: string }[] = [
-    { name: "About", href: "/about" },
-    { name: "Blog", href: "/blog" },
-    { name: "Team", href: "/team" },
-  ];
-
-  const productSections = [
-    {
-      title: "Second Brain",
-      items: [
-        {
-          name: "Notes",
-          description: "Capture ideas and thoughts",
-          href: "/products/second-brain/notes",
-        },
-        {
-          name: "AI Reflection",
-          description: "Get insights from your notes",
-          href: "/products/second-brain/ai",
-        },
-        {
-          name: "Smart Search",
-          description: "Find anything instantly",
-          href: "/products/second-brain/search",
-        },
-      ],
-    },
-    {
-      title: "AI Aggregator",
-      items: [
-        {
-          name: "Multi-Model Chat",
-          description: "Compare AI responses",
-          href: "/products/ai-aggregator/chat",
-        },
-        {
-          name: "Unified Answer",
-          description: "Get one refined output",
-          href: "/products/ai-aggregator/unified",
-        },
-        {
-          name: "Model Comparison",
-          description: "See differences clearly",
-          href: "/products/ai-aggregator/compare",
-        },
-      ],
-    },
-    {
-      title: "API Workspace",
-      items: [
-        {
-          name: "Request Builder",
-          description: "Send API requests easily",
-          href: "/products/api-workspace/request",
-        },
-        {
-          name: "Response Viewer",
-          description: "Inspect responses clearly",
-          href: "/products/api-workspace/response",
-        },
-        {
-          name: "Collections",
-          description: "Organize your APIs",
-          href: "/products/api-workspace/collections",
-        },
-      ],
-    },
-  ];
-
-  const { theme } = useTheme();
   return (
-    <nav className="fixed top-0 left-0 w-full h-16 border-b shadow-2xs flex items-center justify-between px-3 md:px-34 bg-background">
+    <nav className="fixed top-0 left-0 w-full h-16 border-b shadow-2xs flex items-center justify-between px-3 md:px-34 z-20 bg-background">
       <Link
         to={"/"}
         className="-ml-1 flex h-full w-fit items-center justify-center gap-1"
@@ -120,18 +43,245 @@ const Navbar = () => {
             <NavigationMenuTrigger className="dark:text-muted-foreground text-xs">
               Products
             </NavigationMenuTrigger>
-            <NavigationMenuContent className="p-2 bg-background">
-              <div className="grid grid-cols-3 gap-13 min-w-180 p-2 rounded-md">
-                {productSections.map((section) => (
-                  <div key={section.title} className="flex flex-col gap-3">
-                    <h3 className="text-xs font-semibold">{section.title}</h3>
+            <NavigationMenuContent className="p-3 bg-background/80 backdrop-blur-xl border border-border/50 shadow-2xl rounded-xl animate-in fade-in zoom-in-95 data-[motion=from-start]:slide-in-from-left-2 data-[motion=from-end]:slide-in-from-right-2 data-[motion=to-start]:slide-out-to-left-2 data-[motion=to-end]:slide-out-to-right-2">
+              <div className="flex gap-2 rounded-xl min-w-200">
+                <GlareCard className="group relative flex flex-col justify-between p-5 w-full overflow-hidden">
+                  {/* subtle gradient overlay */}
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300" />
 
-                    <Separator orientation="horizontal" />
+                  <div className="flex flex-col gap-4">
+                    {/* Icon container */}
+                    <div className="relative flex items-center justify-center h-12 w-12 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:border-white/20">
+                      <Logo size="sm" />
+
+                      {/* glow effect */}
+                      <div className="absolute inset-0 rounded-xl bg-white/10 blur-md opacity-0 group-hover:opacity-100 transition duration-300" />
+                    </div>
+
+                    {/* Text */}
+                    <div className="flex flex-col gap-1">
+                      <p className="text-white font-semibold text-base tracking-tight">
+                        All Products
+                      </p>
+
+                      <p className="text-xs text-neutral-400 leading-relaxed">
+                        Explore our suite of developer tools.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Bottom CTA */}
+                  <div className="flex items-center justify-between mt-6">
+                    <span className="text-xs text-neutral-500 group-hover:text-neutral-300 transition">
+                      Explore
+                    </span>
+
+                    <div className="flex items-center justify-center h-6 w-6 rounded-full bg-white/5 border border-white/10 group-hover:bg-white/10 transition">
+                      <IconArrowRight className="size-3 text-neutral-300 group-hover:translate-x-0.5 transition-transform" />
+                    </div>
+                  </div>
+                </GlareCard>
+                <div className="flex flex-col  p-2 rounded-md">
+                  <div className="flex-1 grid grid-cols-3 gap-13">
+                    {productSections.map((section, idx) => (
+                      <div key={section.title} className="flex flex-col gap-3">
+                        <h3
+                          className="text-sm w-fit text-muted-foreground"
+                          onMouseEnter={() => setHoveredIndex(idx)}
+                          onMouseLeave={() => setHoveredIndex(null)}
+                        >
+                          {section.title}
+                        </h3>
+
+                        <div className="relative h-px w-full bg-border overflow-hidden">
+                          <motion.div
+                            className="absolute top-0 h-full bg-linear-to-r from-[#A97CF8] via-[#F38CB8] to-[#FDCC92] shadow-[0_0_8px_rgba(255,200,0,0.5)]"
+                            initial={{ x: "-100%", width: "100%" }}
+                            animate={
+                              hoveredIndex === idx ? { x: "0%" } : { x: "100%" }
+                            }
+                            transition={{ duration: 0.3, ease: "easeInOut" }}
+                          />
+                        </div>
+
+                        <ul className="flex flex-col gap-3">
+                          {section.items.map((item) => (
+                            <Link
+                              to={item.href}
+                              key={item.name}
+                              className="group"
+                            >
+                              <p className="text-sm flex items-center gap-1 text-primary font-medium group-hover:text-hover w-fit transition-all duration-200 ease-in-out">
+                                {item.name}
+
+                                <IconArrowRight className="opacity-0 -translate-x-1 transition-all duration-200 ease-in-out group-hover:translate-x-0 group-hover:opacity-100 size-3.5" />
+                              </p>
+                              <p className="text-xs text-muted-foreground">
+                                {item.description}
+                              </p>
+                            </Link>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="w-full py-2 border px-3 rounded-xl flex items-center justify-between">
+                    <h1 className="text-sm text-muted-foreground">
+                      Try our v1
+                    </h1>
+
+                    <Button
+                      className="text-sm text-muted-foreground"
+                      variant={"link"}
+                    >
+                      <Link to={"/products"}>Get Started</Link>
+                      <IconArrowRight />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <NavigationMenuTrigger className="dark:text-muted-foreground text-xs">
+              Tools
+            </NavigationMenuTrigger>
+
+            <NavigationMenuContent className="p-3 bg-background/80 backdrop-blur-xl border border-border/50 shadow-2xl  rounded-xl animate-in fade-in zoom-in-95 data-[motion=from-start]:slide-in-from-left-2 data-[motion=from-end]:slide-in-from-right-2 data-[motion=to-start]:slide-out-to-left-2 data-[motion=to-end]:slide-out-to-right-2">
+              <div className="flex gap-2 rounded-xl min-w-200">
+                <GlareCard className="group relative flex flex-col justify-between p-5 w-full overflow-hidden">
+                  {/* subtle gradient overlay */}
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300" />
+
+                  <div className="flex flex-col gap-4">
+                    {/* Icon container */}
+                    <div className="relative flex items-center justify-center h-12 w-12 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:border-white/20">
+                      <Logo size="sm" />
+
+                      {/* glow effect */}
+                      <div className="absolute inset-0 rounded-xl bg-white/10 blur-md opacity-0 group-hover:opacity-100 transition duration-300" />
+                    </div>
+
+                    {/* Text */}
+                    <div className="flex flex-col gap-1">
+                      <p className="text-white font-semibold text-base tracking-tight">
+                        All Tools
+                      </p>
+
+                      <p className="text-xs text-neutral-400 leading-relaxed">
+                        Explore free tools for your daily tasks.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Bottom CTA */}
+                  <div className="flex items-center justify-between mt-6">
+                    <span className="text-xs text-neutral-500 group-hover:text-neutral-300 transition">
+                      Explore
+                    </span>
+
+                    <div className="flex items-center justify-center h-6 w-6 rounded-full bg-white/5 border border-white/10 group-hover:bg-white/10 transition">
+                      <IconArrowRight className="size-3 text-neutral-300 group-hover:translate-x-0.5 transition-transform" />
+                    </div>
+                  </div>
+                </GlareCard>
+                <div className="flex flex-col gap-4 p-2 rounded-md">
+                  <div className="flex-1 grid grid-cols-3 gap-13">
+                    {toolsSections.map((section, idx) => (
+                      <div key={section.title} className="flex flex-col gap-3">
+                        <h3
+                          className="text-sm w-fit text-muted-foreground"
+                          onMouseEnter={() => setHoveredIndex(idx)}
+                          onMouseLeave={() => setHoveredIndex(null)}
+                        >
+                          {section.title}
+                        </h3>
+
+                        <div className="relative h-px w-full bg-border overflow-hidden">
+                          <motion.div
+                            className="absolute top-0 h-full bg-linear-to-r from-[#A97CF8] via-[#F38CB8] to-[#FDCC92] shadow-[0_0_8px_rgba(255,200,0,0.5)]"
+                            initial={{ x: "-100%", width: "100%" }}
+                            animate={
+                              hoveredIndex === idx ? { x: "0%" } : { x: "100%" }
+                            }
+                            transition={{ duration: 0.3, ease: "easeInOut" }}
+                          />
+                        </div>
+
+                        <ul className="flex flex-col gap-3">
+                          {section.items.map((item) => (
+                            <Link
+                              to={item.href}
+                              key={item.name}
+                              className="group"
+                            >
+                              <p className="text-sm flex items-center gap-1 text-primary font-medium group-hover:text-hover w-fit transition-all duration-200 ease-in-out">
+                                {item.name}
+
+                                <IconArrowRight className="opacity-0 -translate-x-1 transition-all duration-200 ease-in-out group-hover:translate-x-0 group-hover:opacity-100 size-3.5" />
+                              </p>
+                              <p className="text-xs text-muted-foreground">
+                                {item.description}
+                              </p>
+                            </Link>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="w-full py-2 border px-3 rounded-xl flex items-center justify-between">
+                    <h1 className="text-sm text-muted-foreground">
+                      Try our v1
+                    </h1>
+
+                    <Button
+                      className="text-sm text-muted-foreground"
+                      variant={"link"}
+                    >
+                      <Link to={"/products"}>Get Started</Link>
+                      <IconArrowRight />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <NavigationMenuTrigger className="dark:text-muted-foreground text-xs">
+              Company
+            </NavigationMenuTrigger>
+
+            <NavigationMenuContent className="p-3 bg-background/80 backdrop-blur-xl border border-border/50 shadow-2xl  rounded-xl animate-in fade-in zoom-in-95 data-[motion=from-start]:slide-in-from-left-2 data-[motion=from-end]:slide-in-from-right-2 data-[motion=to-start]:slide-out-to-left-2 data-[motion=to-end]:slide-out-to-right-2">
+              <div className="grid grid-cols-3 gap-13 min-w-200 p-2 rounded-md">
+                {companySections.map((section, idx) => (
+                  <div key={section.title} className="flex flex-col gap-3">
+                    <h3
+                      className="text-sm w-fit text-muted-foreground"
+                      onMouseEnter={() => setHoveredIndex(idx)}
+                      onMouseLeave={() => setHoveredIndex(null)}
+                    >
+                      {section.title}
+                    </h3>
+
+                    <div className="relative h-px w-full bg-border overflow-hidden">
+                      <motion.div
+                        className="absolute top-0 h-full bg-linear-to-r from-[#A97CF8] via-[#F38CB8] to-[#FDCC92] shadow-[0_0_8px_rgba(255,200,0,0.5)]"
+                        initial={{ x: "-100%", width: "100%" }}
+                        animate={
+                          hoveredIndex === idx ? { x: "0%" } : { x: "100%" }
+                        }
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                      />
+                    </div>
 
                     <ul className="flex flex-col gap-3">
                       {section.items.map((item) => (
                         <Link to={item.href} key={item.name} className="group">
-                          <p className="text-xs flex items-center gap-1 font-medium group-hover:text-primary">
+                          <p className="text-sm flex items-center gap-1 text-primary font-medium group-hover:text-hover w-fit transition-all duration-200 ease-in-out">
                             {item.name}
 
                             <IconArrowRight className="opacity-0 -translate-x-1 transition-all duration-200 ease-in-out group-hover:translate-x-0 group-hover:opacity-100 size-3.5" />
@@ -150,97 +300,71 @@ const Navbar = () => {
 
           <NavigationMenuItem>
             <NavigationMenuTrigger className="dark:text-muted-foreground text-xs">
-              Tools
+              Resources
             </NavigationMenuTrigger>
-            <NavigationMenuContent className="p-4 bg-background">
-              <div className="flex min-w-150 gap-2">
-                {/* Left div */}
-                <div className="h-full w-full">
-                  <ul className="flex flex-col gap-3">
-                    {tools.map((product) => (
-                      <Link
-                        to={product.href}
-                        key={product.name}
-                        className="text-muted-foreground hover:text-primary dark:hover:text-white transition-all duration-150 ease-in text-sm"
-                      >
-                        {product.name}
-                      </Link>
-                    ))}
-                  </ul>
-                </div>
 
-                {/* Right Div */}
-                <div className="flex gap-2 w-full">
-                  <div className="w-1/2 h-full border rounded-md relative cursor-pointer overflow-hidden dark:hover:border-primary hover:border-primary transition-all duration-200 ease-in-out">
-                    <BackgroundBeamsWithCollision className="w-full flex-col p-4">
-                      <h1 className="leading-5 text-sm font-semibold dark:text-white">
-                        JWT Decoder <br /> & Inspector{" "}
-                      </h1>
-                    </BackgroundBeamsWithCollision>
+            <NavigationMenuContent className="p-3 bg-background/80 backdrop-blur-xl border border-border/50 shadow-2xl  rounded-xl animate-in fade-in zoom-in-95 data-[motion=from-start]:slide-in-from-left-2 data-[motion=from-end]:slide-in-from-right-2 data-[motion=to-start]:slide-out-to-left-2 data-[motion=to-end]:slide-out-to-right-2">
+              <div className="grid grid-cols-3 gap-13 min-w-200 p-2 rounded-md">
+                {resourcesSections.map((section, idx) => (
+                  <div key={section.title} className="flex flex-col gap-3">
+                    <h3
+                      className="text-sm w-fit text-muted-foreground"
+                      onMouseEnter={() => setHoveredIndex(idx)}
+                      onMouseLeave={() => setHoveredIndex(null)}
+                    >
+                      {section.title}
+                    </h3>
+
+                    <div className="relative h-px w-full bg-border overflow-hidden">
+                      <motion.div
+                        className="absolute top-0 h-full bg-linear-to-r from-[#A97CF8] via-[#F38CB8] to-[#FDCC92] shadow-[0_0_8px_rgba(255,200,0,0.5)]"
+                        initial={{ x: "-100%", width: "100%" }}
+                        animate={
+                          hoveredIndex === idx ? { x: "0%" } : { x: "100%" }
+                        }
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                      />
+                    </div>
+
+                    <ul className="flex flex-col gap-3">
+                      {section.items.map((item) => (
+                        <Link to={item.href} key={item.name} className="group">
+                          <p className="text-sm flex items-center gap-1 text-primary font-medium group-hover:text-hover w-fit transition-all duration-200 ease-in-out">
+                            {item.name}
+
+                            <IconArrowRight className="opacity-0 -translate-x-1 transition-all duration-200 ease-in-out group-hover:translate-x-0 group-hover:opacity-100 size-3.5" />
+                          </p>
+                          <p className="text-xs text-muted-foreground">
+                            {item.description}
+                          </p>
+                        </Link>
+                      ))}
+                    </ul>
                   </div>
-                  <div className="w-1/2 h-full border rounded-md relative cursor-pointer hover:bg-background/90 dark:hover:border-primary hover:border-primary p-4  transition-all duration-200 ease-in-out">
-                    <h1 className="leading-5 text-sm font-semibold dark:text-white">
-                      API Request <br /> Tester{" "}
-                    </h1>
-                    <DottedGlowBackground
-                      className="pointer-events-none mask-radial-to-90% mask-radial-at-center  hover:bg-background"
-                      opacity={1}
-                      gap={10}
-                      radius={1.6}
-                      colorLightVar="--color-neutral-500"
-                      glowColorLightVar="--color-neutral-600"
-                      colorDarkVar="--color-neutral-500"
-                      glowColorDarkVar="--color-sky-800"
-                      backgroundOpacity={0}
-                      speedMin={0.3}
-                      speedMax={1.6}
-                      speedScale={1}
-                    />
-                  </div>
-                </div>
+                ))}
               </div>
             </NavigationMenuContent>
           </NavigationMenuItem>
 
           <NavigationMenuItem>
-            <NavigationMenuTrigger className="dark:text-muted-foreground text-xs">
-              Company
-            </NavigationMenuTrigger>
-
-            <NavigationMenuContent className="p-4 bg-background">
-              <div className="h-full flex min-w-100 gap-2">
-                <ul className="flex flex-col gap-3">
-                  {company.map((company) => (
-                    <Link
-                      to={company.href}
-                      key={company.name}
-                      className="text-muted-foreground hover:text-primary dark:hover:text-white transition-all duration-150 ease-in text-sm"
-                    >
-                      {company.name}
-                    </Link>
-                  ))}
-                </ul>
-              </div>
-            </NavigationMenuContent>
+            <NavigationMenuLink
+              asChild
+              className={navigationMenuTriggerStyle()}
+            >
+              <Link to="/report" className="dark:text-muted-foreground text-xs">
+                Report
+              </Link>
+            </NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
 
       <div className="h-full w-fit flex items-center justify-center gap-2">
-        <ThemeSwitcher />
+        <AnimatedThemeToggler />
         <Button variant={"ghost"}>Log in</Button>
-        <Button
-          variant={theme === "dark" ? "secondary" : "default"}
-          className="overflow-hidden group"
-        >
+        <InteractiveHoverButton className="font-heading">
           Get Started
-          <span className="relative w-4 h-4">
-            {/* Current icon - slides out */}
-            <IconChevronRight className="absolute inset-0 transition-all duration-200 ease-in-out group-hover:translate-x-4 group-hover:opacity-0 size-3.5" />
-            {/* New icon - slides in */}
-            <IconArrowRight className="absolute inset-0 opacity-0 -translate-x-4 transition-all duration-200 ease-in-out group-hover:translate-x-0 group-hover:opacity-100 size-3.5" />
-          </span>
-        </Button>
+        </InteractiveHoverButton>
       </div>
     </nav>
   );

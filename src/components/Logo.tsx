@@ -6,8 +6,8 @@ const Logo = ({ size }: { size: "sm" | "md" | "lg" }) => {
   };
   return (
     <svg
-      className={`${sizeClasses[size]} shrink-0 dark:text-white text-black`}
-      viewBox="44 20 46 80"
+      className={`${sizeClasses[size]} shrink-0 text-primary`}
+      viewBox="44 20 47 81"
       display={"block"}
       xmlns="http://www.w3.org/2000/svg"
       preserveAspectRatio="xMidYMid meet"
