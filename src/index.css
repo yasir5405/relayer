@@ -137,7 +137,7 @@
 @theme inline {
   --font-sans: "Figtree Variable", sans-serif;
   --font-heading: "Space Grotesk Variable", sans-serif;
-  --color-hover: oklch(39.8% 0.195 277.366);
+  --color-hover: oklch(45.7% 0.24 277.023);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -228,6 +228,24 @@
   @keyframes gradient {
   to {
     background-position: var(--bg-size, 300%) 0;
+    }
+  }
+  --animate-line-shadow: line-shadow 15s linear infinite;
+  @keyframes line-shadow {
+  0% {
+    background-position: 0 0;
+    }
+  100% {
+    background-position: 100% -100%;
+    }
+  }
+  --animate-shiny-text: shiny-text 8s infinite;
+  @keyframes shiny-text {
+  0%, 90%, 100% {
+    background-position: calc(-100% - var(--shiny-width)) 0;
+    }
+  30%, 60% {
+    background-position: calc(100% + var(--shiny-width)) 0;
     }
   }}
 

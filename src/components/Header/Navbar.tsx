@@ -20,9 +20,8 @@ import {
   toolsSections,
 } from "@/constants/constants";
 import { useState } from "react";
-import { AnimatedThemeToggler } from "../ui/animated-theme-toggler";
+// import { AnimatedThemeToggler } from "../ui/animated-theme-toggler";
 import { GlareCard } from "../ui/glare-card";
-
 const Navbar = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
@@ -47,7 +46,7 @@ const Navbar = () => {
               <div className="flex gap-2 rounded-xl min-w-200">
                 <GlareCard className="group relative flex flex-col justify-between p-5 w-full overflow-hidden">
                   {/* subtle gradient overlay */}
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300" />
+                  <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-white/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300" />
 
                   <div className="flex flex-col gap-4">
                     {/* Icon container */}
@@ -360,8 +359,10 @@ const Navbar = () => {
       </NavigationMenu>
 
       <div className="h-full w-fit flex items-center justify-center gap-2">
-        <AnimatedThemeToggler />
-        <Button variant={"ghost"}>Log in</Button>
+        {/* <AnimatedThemeToggler /> */}
+        <Button variant={"ghost"} className="text-muted-foreground">
+          Log in
+        </Button>
         <InteractiveHoverButton className="font-heading">
           Get Started
         </InteractiveHoverButton>
