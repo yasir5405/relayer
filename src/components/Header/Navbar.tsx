@@ -56,7 +56,7 @@ const MobileProductsAccordion = ({
                 <h1
                   key={item.name}
                   onClick={() => navigate(item.href)}
-                  className="text-base text-white transition-colors px-2 py-2 rounded-md hover:bg-white/5 no-underline"
+                  className="text-base text-neutral-300 transition-colors px-2 py-2 rounded-md hover:bg-white/5 no-underline"
                 >
                   {item.name}
                 </h1>
@@ -111,6 +111,8 @@ const Navbar = () => {
           <MobileNavSections section={toolsSections} title="Tools" />
           <MobileNavSections section={companySections} title="Company" />
           <MobileNavSections section={resourcesSections} title="Resources" />
+
+          <h1 className="font-medium text-2xl">Report an issue</h1>
         </div>
       )}
 
