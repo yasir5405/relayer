@@ -97,6 +97,7 @@ const MobileNavSections = ({
 };
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -104,9 +105,23 @@ const Navbar = () => {
   }, [open]);
 
   return (
-    <nav className="-ml-1 fixed top-0 left-0 w-full h-16 border-b shadow-2xs flex items-center justify-between px-5 md:px-34 z-20 bg-background">
+    <nav className="-ml-0.5 fixed top-0 left-0 w-full h-16 border-b shadow-2xs flex items-center justify-between px-5 md:px-34 z-20 bg-background">
       {open && (
         <div className="w-full fixed top-16 inset-0 py-8 z-50 bg-black/80 backdrop-blur-lg px-5 flex md:hidden flex-col gap-10 overflow-y-auto">
+          <div className="w-full flex flex-col items-center justify-center gap-5">
+            <Button
+              size={"lg"}
+              className="w-full text-base py-2 px-8 dark:text-white hover:bg-hover transition-all duration-200 ease-in-out"
+            >
+              Get Started
+            </Button>
+            <InteractiveHoverButton
+              className="font-heading w-full rounded-lg"
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </InteractiveHoverButton>
+          </div>
           <MobileProductsAccordion section={productSections} />
           <MobileNavSections section={toolsSections} title="Tools" />
           <MobileNavSections section={companySections} title="Company" />
@@ -131,8 +146,9 @@ const Navbar = () => {
         <Button
           variant={"ghost"}
           className="hidden md:flex text-muted-foreground"
+          asChild
         >
-          Log in
+          <Link to={"/login"}>Log in</Link>
         </Button>
 
         <InteractiveHoverButton className="font-heading hidden md:flex">
