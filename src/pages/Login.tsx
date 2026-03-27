@@ -30,7 +30,7 @@ const Login = () => {
 
   return (
     <div className="h-dvh w-full flex items-center justify-center">
-      <div className="px-4 py-8 w-full h-full md:h-fit md:w-fit flex items-center flex-col gap-2">
+      <div className="px-4 py-8 w-full h-full md:h-fit md:w-fit flex items-center flex-col justify-center gap-2">
         <div className="border w-fit border-zinc-800 rounded-lg p-2">
           <Logo size="md" />
         </div>
