@@ -5,7 +5,6 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "../ui/navigation-menu";
 import { GlareCard } from "../ui/glare-card";
 import {
@@ -20,6 +19,7 @@ import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import Logo from "../Logo";
 import { useState } from "react";
+import { navigationMenuTriggerStyle } from "../ui/navigation-menu-trigger-style";
 
 const NavbarLinks = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
