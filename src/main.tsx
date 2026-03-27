@@ -8,7 +8,7 @@ import { ThemeProvider } from "./context/ThemeProvider.tsx";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
-      <ThemeProvider defaultTheme="light" storageKey="relayer-ui-theme">
+      <ThemeProvider defaultTheme="dark" storageKey="relayer-ui-theme">
         <App />
       </ThemeProvider>
     </BrowserRouter>
