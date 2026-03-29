@@ -17,30 +17,32 @@ import {
 import { IconEye, IconEyeClosed } from "@tabler/icons-react";
 import { useState } from "react";
 
-export type LoginParams = {
+export type SignupParams = {
+  name: string;
   email: string;
   password: string;
 };
 
-const Login = () => {
+const Signup = () => {
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { isValid },
-  } = useForm<LoginParams>({
+  } = useForm<SignupParams>({
     mode: "onChange",
   });
 
-  const [showPassword, setShowPassword] = useState(false);
+  
+    const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = (data: LoginParams) => {
+  const handleSignup = (data: SignupParams) => {
     console.log(data);
   };
 
   return (
     <>
-      <title>Sumptuo — Login</title>
+      <title>Sumptuo — Signup</title>
       <div className="h-dvh w-full flex items-center justify-center">
         <div className="px-4 py-8 w-full h-full md:h-fit md:w-fit flex items-center flex-col justify-center gap-2">
           <div
@@ -53,22 +55,34 @@ const Login = () => {
           <div className="w-full md:min-w-md flex justify-center flex-col py-2 gap-6">
             <div>
               <h1 className="font-heading text-3xl font-semibold text-center">
-                Log in to Sumptuo
+                Create a Sumptuo account
               </h1>
 
               <p className="text-center text-sm text-muted-foreground mt-1">
-                Don&apos;t have an account?{" "}
+                Already have an account?{" "}
                 <Link
-                  to={"/signup"}
+                  to={"/login"}
                   className="dark:text-white text-black hover:text-muted-foreground dark:hover:text-muted-foreground transition-all duration-200 ease-in-out"
                 >
-                  Sign up.
+                  Log in.
                 </Link>
               </p>
             </div>
 
-            <form className="w-full" onSubmit={handleSubmit(handleLogin)}>
+            <form className="w-full" onSubmit={handleSubmit(handleSignup)}>
               <FieldGroup className="w-full flex flex-col gap-6">
+                <Field>
+                  <FieldLabel htmlFor="name" className="text-muted-foreground">
+                    Name
+                  </FieldLabel>
+                  <Input
+                    placeholder="email@example.com"
+                    type="text"
+                    id="name"
+                    className="py-6 px-5 rounded-2xl"
+                    {...register("name", { required: true })}
+                  />
+                </Field>
                 <Field>
                   <FieldLabel htmlFor="email" className="text-muted-foreground">
                     Email
@@ -82,21 +96,12 @@ const Login = () => {
                   />
                 </Field>
                 <Field>
-                  <div className="w-full flex justify-between">
-                    <FieldLabel
-                      htmlFor="password"
-                      className="text-muted-foreground"
-                    >
-                      Password
-                    </FieldLabel>
-
-                    <Link
-                      to={"/forgot-password"}
-                      className="text-sm hover:text-muted-foreground transition-all duration-200 ease-in-out"
-                    >
-                      Forgot your password?
-                    </Link>
-                  </div>
+                  <FieldLabel
+                    htmlFor="password"
+                    className="text-muted-foreground"
+                  >
+                    Password
+                  </FieldLabel>
 
                   <InputGroup className="py-6 px-3 rounded-2xl">
                     <InputGroupInput
@@ -182,4 +187,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

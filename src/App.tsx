@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import LandingLayout from "./layouts/LandingLayout";
-import { Home, Login } from "./pages";
+import { Home, Login, Signup } from "./pages";
 import AuthLayout from "./layouts/AuthLayout";
 const App = () => {
   return (
@@ -12,6 +12,7 @@ const App = () => {
       {/* Auth Pages */}
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
       </Route>
     </Routes>
   );
