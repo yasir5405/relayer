@@ -9,23 +9,44 @@ function NavigationMenu({
   className,
   children,
   viewport = true,
+  onValueChange, // 1. Destructure onValueChange
   ...props
 }: React.ComponentProps<typeof NavigationMenuPrimitive.Root> & {
   viewport?: boolean;
 }) {
+  // 2. Add state to track if a dropdown is active
+  const [isOpen, setIsOpen] = React.useState(false);
+
   return (
-    <NavigationMenuPrimitive.Root
-      data-slot="navigation-menu"
-      data-viewport={viewport}
-      className={cn(
-        "group/navigation-menu relative flex max-w-max flex-1 items-center justify-center",
-        className,
-      )}
-      {...props}
-    >
-      {children}
-      {viewport && <NavigationMenuViewport />}
-    </NavigationMenuPrimitive.Root>
+    <>
+      {/* 3. Add the background overlay */}
+      <div
+        className={cn(
+          "fixed inset-0 top-16 z-[-1] h-screen w-screen bg-zinc/10 backdrop-blur-sm transition-all duration-300 dark:bg-black/60",
+          isOpen
+            ? "opacity-100 visible"
+            : "opacity-0 invisible pointer-events-none",
+        )}
+      />
+
+      <NavigationMenuPrimitive.Root
+        // 4. Intercept the value change to trigger our overlay
+        onValueChange={(value) => {
+          setIsOpen(!!value);
+          if (onValueChange) onValueChange(value);
+        }}
+        data-slot="navigation-menu"
+        data-viewport={viewport}
+        className={cn(
+          "group/navigation-menu relative flex max-w-max flex-1 items-center justify-center",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+        {viewport && <NavigationMenuViewport />}
+      </NavigationMenuPrimitive.Root>
+    </>
   );
 }
 
