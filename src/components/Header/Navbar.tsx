@@ -20,6 +20,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { AnimatedThemeToggler } from "../ui/animated-theme-toggler";
 
 const MobileProductsAccordion = ({
   section,
@@ -36,7 +37,7 @@ const MobileProductsAccordion = ({
   const navigate = useNavigate();
   return (
     <div className="flex w-full flex-col gap-4 font-heading">
-      <h1 className="text-muted-foreground text-sm">Product</h1>
+      <h1 className="dark:text-muted-foreground text-sm">Product</h1>
 
       <Accordion type="single" collapsible className="w-full">
         {section.map((group, index) => (
@@ -56,7 +57,7 @@ const MobileProductsAccordion = ({
                 <h1
                   key={item.name}
                   onClick={() => navigate(item.href)}
-                  className="text-base text-neutral-300 transition-colors px-2 py-2 rounded-md hover:bg-white/5 no-underline"
+                  className="text-base dark:text-neutral-300 transition-colors px-2 py-2 rounded-md hover:bg-white/5 no-underline"
                 >
                   {item.name}
                 </h1>
@@ -85,7 +86,7 @@ const MobileNavSections = ({
 }) => {
   return (
     <div className="flex w-full flex-col gap-4 font-heading">
-      <h1 className="text-muted-foreground text-sm">{title}</h1>
+      <h1 className="dark:text-muted-foreground text-sm">{title}</h1>
 
       <div className="w-full flex flex-col gap-2.5">
         {section.map((section) => (
@@ -107,20 +108,22 @@ const Navbar = () => {
   return (
     <nav className="-ml-0.5 fixed top-0 left-0 w-full h-16 border-b shadow-2xs flex items-center justify-between px-5 md:px-34 z-20 bg-background">
       {open && (
-        <div className="w-full fixed top-16 inset-0 py-8 z-50 bg-black/80 backdrop-blur-lg px-5 flex md:hidden flex-col gap-10 overflow-y-auto">
-          <div className="w-full flex flex-col items-center justify-center gap-5">
+        <div className="w-full fixed top-16 inset-0 py-8 z-50 dark:bg-black/80 bg-background  dark:backdrop-blur-lg px-5 flex md:hidden flex-col gap-10 overflow-y-auto">
+          <div className="w-full flex flex-col items-center justify-center gap-3">
             <Button
               size={"lg"}
               className="w-full text-base py-2 px-8 dark:text-white hover:bg-hover transition-all duration-200 ease-in-out"
-            >
-              Get Started
-            </Button>
-            <InteractiveHoverButton
-              className="font-heading w-full rounded-lg"
               onClick={() => navigate("/login")}
             >
               Login
-            </InteractiveHoverButton>
+            </Button>
+            <Button
+              size={"lg"}
+              variant={"link"}
+              className="w-full text-base border border-primary py-2 px-8  hover:bg-hover transition-all duration-200 ease-in-out"
+            >
+              Get Started
+            </Button>
           </div>
           <MobileProductsAccordion section={productSections} />
           <MobileNavSections section={toolsSections} title="Tools" />
@@ -131,18 +134,21 @@ const Navbar = () => {
         </div>
       )}
 
-      <Link
-        to={"/"}
-        className="flex h-full w-fit items-center justify-center gap-1"
-      >
-        <Logo size="sm" />
+      <div className="flex h-full w-fit items-center justify-center gap-6">
+        <Link
+          to={"/"}
+          className="flex h-full w-fit items-center justify-center gap-2"
+        >
+          <Logo size="xs" />
 
-        <h1 className="font-heading text-2xl font-semibold">Relayer</h1>
-      </Link>
+          <h1 className="font-heading text-xl font-semibold">Sumptuo</h1>
+        </Link>
 
-      <NavbarLinks />
+        <NavbarLinks />
+      </div>
 
       <div className="h-full w-fit flex items-center justify-center gap-3 md:gap-2">
+        <AnimatedThemeToggler />
         <Button
           variant={"ghost"}
           className="hidden md:flex text-muted-foreground"

@@ -1,51 +1,51 @@
 export const toolsSections = [
   {
-    title: "Data Tools",
+    title: "Core",
     items: [
       {
-        name: "JSON Formatter",
-        description: "Format and validate JSON instantly",
-        href: "/tools/json-formatter",
+        name: "Dashboard",
+        description: "See your income, expenses, and savings at a glance",
+        href: "/dashboard",
       },
       {
-        name: "Base64 Encoder/Decoder",
-        description: "Encode and decode Base64 data quickly",
-        href: "/tools/base64",
+        name: "Transactions",
+        description: "Track and manage all your spending",
+        href: "/transactions",
       },
       {
-        name: "Hash Generator",
-        description: "Generate secure hashes for any input",
-        href: "/tools/hash-generator",
+        name: "Budgets",
+        description: "Set limits and stay in control of your money",
+        href: "/budgets",
       },
     ],
   },
   {
-    title: "Developer Utilities",
+    title: "Planning",
     items: [
       {
-        name: "Regex Tester",
-        description: "Test and debug regular expressions",
-        href: "/tools/regex-tester",
+        name: "Goals",
+        description: "Save for what matters, with clear progress",
+        href: "/goals",
       },
       {
-        name: "JWT Decoder",
-        description: "Decode and inspect JWT tokens",
-        href: "/tools/jwt-decoder",
-      },
-      {
-        name: "API Request Tester",
-        description: "Send and inspect API requests",
-        href: "/tools/api-tester",
+        name: "Forecast",
+        description: "See where your money is going next",
+        href: "/forecast",
       },
     ],
   },
   {
-    title: "Advanced",
+    title: "Import & Data",
     items: [
       {
-        name: "JSON to TypeScript Schema Generator",
-        description: "Convert JSON into TypeScript types",
-        href: "/tools/schema-generator",
+        name: "CSV Import",
+        description: "Upload bank statements in seconds",
+        href: "/import",
+      },
+      {
+        name: "Export Data",
+        description: "Download your data anytime",
+        href: "/settings/export",
       },
     ],
   },
@@ -57,18 +57,13 @@ export const companySections = [
     items: [
       {
         name: "About",
-        description: "Learn about our mission and vision",
+        description: "Why Sumptuo exists",
         href: "/about",
       },
       {
-        name: "Team",
-        description: "Meet the people behind Relayer",
-        href: "/team",
-      },
-      {
-        name: "Careers",
-        description: "Join us in building the future",
-        href: "/careers",
+        name: "Philosophy",
+        description: "Privacy-first, simple, and honest finance",
+        href: "/philosophy",
       },
     ],
   },
@@ -77,18 +72,13 @@ export const companySections = [
     items: [
       {
         name: "Contact",
-        description: "Get in touch with our team",
+        description: "Reach out for support or feedback",
         href: "/contact",
       },
       {
         name: "Support",
-        description: "Help and support resources",
+        description: "Help with using Sumptuo",
         href: "/support",
-      },
-      {
-        name: "Community",
-        description: "Join discussions and connect",
-        href: "/community",
       },
     ],
   },
@@ -97,12 +87,12 @@ export const companySections = [
     items: [
       {
         name: "Privacy Policy",
-        description: "How we handle your data",
+        description: "We don’t sell your data. Ever.",
         href: "/privacy",
       },
       {
         name: "Terms of Service",
-        description: "Rules and usage guidelines",
+        description: "Simple and fair usage terms",
         href: "/terms",
       },
     ],
@@ -111,62 +101,52 @@ export const companySections = [
 
 export const productSections = [
   {
-    title: "Extra Brain",
+    title: "Tracking",
     items: [
       {
-        name: "Notes",
-        description: "Capture ideas and thoughts",
-        href: "/products/second-brain/notes",
+        name: "Manual Tracking",
+        description: "Log income and expenses effortlessly",
+        href: "/transactions",
       },
       {
-        name: "AI Reflection",
-        description: "Get insights from your notes",
-        href: "/products/second-brain/ai",
-      },
-      {
-        name: "Smart Search",
-        description: "Find anything instantly",
-        href: "/products/second-brain/search",
+        name: "Smart Categories",
+        description: "Organized spending with clean categories",
+        href: "/categories",
       },
     ],
   },
   {
-    title: "AI Aggregator",
+    title: "Insights",
     items: [
       {
-        name: "Multi-Model Chat",
-        description: "Compare AI responses",
-        href: "/products/ai-aggregator/chat",
+        name: "AI Coaching",
+        description: "Understand your money and what to do next",
+        href: "/dashboard#insights",
       },
       {
-        name: "Unified Answer",
-        description: "Get one refined output",
-        href: "/products/ai-aggregator/unified",
-      },
-      {
-        name: "Model Comparison",
-        description: "See differences clearly",
-        href: "/products/ai-aggregator/compare",
+        name: "Spending Analysis",
+        description: "See where your money actually goes",
+        href: "/dashboard#analysis",
       },
     ],
   },
   {
-    title: "API Workspace",
+    title: "Planning",
     items: [
       {
-        name: "Request Builder",
-        description: "Send API requests easily",
-        href: "/products/api-workspace/request",
+        name: "Budgets",
+        description: "Set limits and track progress",
+        href: "/budgets",
       },
       {
-        name: "Response Viewer",
-        description: "Inspect responses clearly",
-        href: "/products/api-workspace/response",
+        name: "Forecasting",
+        description: "Project your future balance",
+        href: "/forecast",
       },
       {
-        name: "Collections",
-        description: "Organize your APIs",
-        href: "/products/api-workspace/collections",
+        name: "Goals",
+        description: "Plan and achieve your savings targets",
+        href: "/goals",
       },
     ],
   },
@@ -178,12 +158,12 @@ export const resourcesSections = [
     items: [
       {
         name: "Documentation",
-        description: "Everything you need to get started",
+        description: "How to use Sumptuo effectively",
         href: "/resources/docs",
       },
       {
-        name: "Guides & Tutorials",
-        description: "Step-by-step learning resources",
+        name: "Guides",
+        description: "Master budgeting and saving",
         href: "/resources/guides",
       },
     ],
@@ -193,13 +173,8 @@ export const resourcesSections = [
     items: [
       {
         name: "Changelog",
-        description: "Track new features and improvements",
+        description: "Track product improvements",
         href: "/resources/changelog",
-      },
-      {
-        name: "Newsletter",
-        description: "Stay updated with latest releases",
-        href: "/resources/newsletter",
       },
     ],
   },
@@ -208,7 +183,7 @@ export const resourcesSections = [
     items: [
       {
         name: "Blog",
-        description: "Articles, insights, and announcements",
+        description: "Money insights, habits, and ideas",
         href: "/resources/blog",
       },
     ],

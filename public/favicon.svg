@@ -1,9 +1,5 @@
-<svg viewBox="44 20 47 81" xmlns="http://www.w3.org/2000/svg">
-  <path d="
-    M44 20 L44 100 L60 100 L60 70
-    C76 70, 88 60, 88 46
-    C88 32, 76 20, 60 20 Z
-    M60 70 C72 74, 82 86, 90 100
-    L72 100 C66 90, 60 82, 54 76 Z
-  " fill="oklch(58.5% 0.233 277.117)"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 19">
+  <rect x="0" y="0"  width="24" height="6" rx="2" fill="#ffffff"/>
+  <rect x="0" y="8"  width="17" height="6" rx="2" fill="#ffffff" opacity="0.65"/>
+  <rect x="0" y="16" width="11" height="6" rx="2" fill="#ffffff" opacity="0.3"/>
 </svg>

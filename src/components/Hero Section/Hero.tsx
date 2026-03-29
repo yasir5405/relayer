@@ -26,9 +26,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="h-full w-[40%] flex items-center justify-center relative">
-        
-      </div>
+      <div className="h-full w-[40%] flex items-center justify-center relative"></div>
     </div>
   );
 };

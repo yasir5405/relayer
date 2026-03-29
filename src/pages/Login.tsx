@@ -7,7 +7,7 @@ import {
   FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 export type LoginParams = {
@@ -16,6 +16,7 @@ export type LoginParams = {
 };
 
 const Login = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -31,21 +32,24 @@ const Login = () => {
   return (
     <div className="h-dvh w-full flex items-center justify-center">
       <div className="px-4 py-8 w-full h-full md:h-fit md:w-fit flex items-center flex-col justify-center gap-2">
-        <div className="border w-fit border-zinc-800 rounded-lg p-2">
-          <Logo size="md" />
+        <div
+          className="border w-fit dark:border-zinc-700 rounded-lg p-2 cursor-pointer"
+          onClick={() => navigate("/")}
+        >
+          <Logo size="sm" />
         </div>
 
         <div className="w-full md:min-w-md flex justify-center flex-col py-2 gap-6">
           <div>
-            <h1 className="font-heading text-2xl md:text-3xl font-semibold text-center">
-              Log in to Relayer
+            <h1 className="font-heading text-3xl font-semibold text-center">
+              Log in to Sumptuo
             </h1>
 
             <p className="text-center text-sm text-muted-foreground mt-1">
               Don&apos;t have an account?{" "}
               <Link
                 to={"/signup"}
-                className="text-white hover:text-muted-foreground transition-all duration-200 ease-in-out"
+                className="dark:text-white text-black hover:text-muted-foreground transition-all duration-200 ease-in-out"
               >
                 Sign up.
               </Link>
