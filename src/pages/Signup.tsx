@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Link, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import {
   InputGroup,
   InputGroupAddon,
@@ -16,27 +16,74 @@ import {
 } from "@/components/ui/input-group";
 import { IconEye, IconEyeClosed } from "@tabler/icons-react";
 import { useState } from "react";
-
-export type SignupParams = {
-  name: string;
-  email: string;
-  password: string;
-};
+import { signup, type SignupParams } from "@/api/auth.api";
+import { toast } from "sonner";
+import { Spinner } from "@/components/ui/spinner";
 
 const Signup = () => {
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
-    formState: { isValid },
+    setError,
+    formState: { isValid, errors },
   } = useForm<SignupParams>({
     mode: "onChange",
   });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSignup = (data: SignupParams) => {
-    console.log(data);
+  const handleSignup: SubmitHandler<SignupParams> = async (
+    data: SignupParams,
+  ) => {
+    setLoading(true);
+
+    try {
+      const res = await signup(data);
+
+      if (!res.success) {
+        const message = res.error?.message ?? res.message;
+        if (message.toLocaleLowerCase().includes("email")) {
+          setError("email", {
+            type: "server",
+            message,
+          });
+        } else if (message.toLocaleLowerCase().includes("password")) {
+          setError("password", {
+            type: "server",
+            message,
+          });
+        } else if (message.toLocaleLowerCase().includes("name")) {
+          setError("name", {
+            type: "server",
+            message,
+          });
+        } else {
+          setError("root", {
+            type: "server",
+            message,
+          });
+        }
+        // console.log(message);
+        // toast.error(message);
+        return;
+      }
+
+      toast.success(res.message);
+      navigate("/login");
+      // console.log(res.message);
+    } catch (error) {
+      setError("root", {
+        type: "server",
+        message: "Network error. Please try again.",
+      });
+      toast.error("Network error or server unreachable");
+      console.error("Unexpected error", error);
+      console.log("Network error or server unreachable");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -75,12 +122,17 @@ const Signup = () => {
                     Name
                   </FieldLabel>
                   <Input
-                    placeholder="email@example.com"
+                    placeholder="John Doe"
                     type="text"
                     id="name"
                     className="py-6 px-5 rounded-2xl"
                     {...register("name", { required: true })}
                   />
+                  {errors.name && (
+                    <p className="text-xs text-red-500">
+                      {errors.name?.message}
+                    </p>
+                  )}
                 </Field>
                 <Field>
                   <FieldLabel htmlFor="email" className="text-muted-foreground">
@@ -93,6 +145,11 @@ const Signup = () => {
                     className="py-6 px-5 rounded-2xl"
                     {...register("email", { required: true })}
                   />
+                  {errors.email && (
+                    <p className="text-xs text-red-500">
+                      {errors.email?.message}
+                    </p>
+                  )}
                 </Field>
                 <Field>
                   <FieldLabel
@@ -125,15 +182,33 @@ const Signup = () => {
                       )}
                     </InputGroupAddon>
                   </InputGroup>
+                  {errors.password && (
+                    <p className="text-xs text-red-500">
+                      {errors.password?.message}
+                    </p>
+                  )}
                 </Field>
+
+                {errors.root?.message && (
+                  <p className="text-xs text-red-500 text-center">
+                    {errors.root.message}
+                  </p>
+                )}
 
                 <Field>
                   <Button
                     className="py-6 px-5 rounded-2xl text-base"
                     type="submit"
-                    disabled={!isValid}
+                    disabled={!isValid || loading}
                   >
-                    Log In
+                    {loading ? (
+                      <div className="flex items-center justify-center gap-2">
+                        <Spinner />
+                        Signing up...
+                      </div>
+                    ) : (
+                      <>Sign up</>
+                    )}
                   </Button>
                 </Field>
 
