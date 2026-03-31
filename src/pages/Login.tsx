@@ -72,7 +72,7 @@ const Login = () => {
       localStorage.setItem("access-token", String(res.data?.accessToken));
       toast.success(res.message);
       await refreshUser();
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       setError("root", {
         type: "server",
