@@ -70,7 +70,7 @@ export const login = async (
       return (
         error.response?.data ?? {
           data: null,
-          message: "Account creation failed",
+          message: "Login failed",
           success: false,
           error: {
             message: "Server did not respond",
@@ -81,7 +81,7 @@ export const login = async (
 
     return {
       data: null,
-      message: "Account creation failed",
+      message: "Login failed",
       success: false,
       error: {
         message: "Server did not respond",
@@ -99,7 +99,7 @@ export const fetchUser = async (): Promise<ApiResponse<User>> => {
       return (
         error.response?.data ?? {
           data: null,
-          message: "Account creation failed",
+          message: "User data fetching failed",
           success: false,
           error: {
             message: "Server did not respond",
@@ -110,7 +110,7 @@ export const fetchUser = async (): Promise<ApiResponse<User>> => {
 
     return {
       data: null,
-      message: "Account creation failed",
+      message: "User data fetching failed",
       success: false,
       error: {
         message: "Server did not respond",
@@ -128,7 +128,7 @@ export const logout = async (): Promise<ApiResponse<null>> => {
       return (
         error.response?.data ?? {
           data: null,
-          message: "Account creation failed",
+          message: "Logout failed",
           success: false,
           error: {
             message: "Server did not respond",
@@ -139,7 +139,7 @@ export const logout = async (): Promise<ApiResponse<null>> => {
 
     return {
       data: null,
-      message: "Account creation failed",
+      message: "Logout failed",
       success: false,
       error: {
         message: "Server did not respond",

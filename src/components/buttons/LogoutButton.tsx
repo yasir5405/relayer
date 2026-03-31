@@ -26,7 +26,7 @@ const LogoutButton = ({
       setLoading(true);
       await logoutUser();
 
-      toast.success("Logged out successfully");
+      // toast.success("Logged out successfully");
 
       navigate("/", { replace: true });
     } catch {

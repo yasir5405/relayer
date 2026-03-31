@@ -1,6 +1,5 @@
 import { fetchUser, logout, type User } from "@/api/auth.api";
 import { createContext, useContext, useEffect, useState } from "react";
-import { toast } from "sonner";
 
 type AuthContextType = {
   user: User | null;
@@ -15,7 +14,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const refreshUser = async (silent = false) => {
+  const refreshUser = async () => {
     const token = localStorage.getItem("access-token");
 
     if (!token) {
@@ -27,13 +26,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     if (res.success) {
       setUser(res.data);
-    } else {
+      return;
+    }
+
+    if (res.error?.code === 401) {
       setUser(null);
       localStorage.removeItem("access-token");
-
-      if (!silent) {
-        toast.error(res.error?.message ?? res.message ?? "Session expired");
-      }
     }
   };
 
