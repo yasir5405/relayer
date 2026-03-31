@@ -1,4 +1,4 @@
-import { fetchUser, type User } from "@/api/auth.api";
+import { fetchUser, logout, type User } from "@/api/auth.api";
 import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -6,6 +6,7 @@ type AuthContextType = {
   user: User | null;
   loading: boolean;
   refreshUser: () => Promise<void>;
+  logoutUser: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -36,6 +37,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const logoutUser = async () => {
+    await logout();
+    setUser(null);
+    localStorage.removeItem("access-token");
+  };
+
   useEffect(() => {
     (async () => {
       await refreshUser();
@@ -43,7 +50,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     })();
   }, []);
   return (
-    <AuthContext.Provider value={{ loading, refreshUser, user }}>
+    <AuthContext.Provider value={{ loading, refreshUser, user, logoutUser }}>
       {children}
     </AuthContext.Provider>
   );

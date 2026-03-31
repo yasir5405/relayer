@@ -118,3 +118,32 @@ export const fetchUser = async (): Promise<ApiResponse<User>> => {
     };
   }
 };
+
+export const logout = async (): Promise<ApiResponse<null>> => {
+  try {
+    const res = await api.post("/auth/logout");
+    return res.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return (
+        error.response?.data ?? {
+          data: null,
+          message: "Account creation failed",
+          success: false,
+          error: {
+            message: "Server did not respond",
+          },
+        }
+      );
+    }
+
+    return {
+      data: null,
+      message: "Account creation failed",
+      success: false,
+      error: {
+        message: "Server did not respond",
+      },
+    };
+  }
+};
