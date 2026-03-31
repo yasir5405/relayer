@@ -33,8 +33,7 @@ const Signup = () => {
     mode: "onChange",
   });
 
-  
-    const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSignup = (data: SignupParams) => {
     console.log(data);
@@ -54,7 +53,7 @@ const Signup = () => {
 
           <div className="w-full md:min-w-md flex justify-center flex-col py-2 gap-6">
             <div>
-              <h1 className="font-heading text-3xl font-semibold text-center">
+              <h1 className="font-heading text-2xl md:text-3xl font-semibold text-center">
                 Create a Sumptuo account
               </h1>
 
