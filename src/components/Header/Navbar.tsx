@@ -21,8 +21,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { AnimatedThemeToggler } from "../ui/animated-theme-toggler";
-import { useAuth } from "@/context/AuthContext";
-import LogoutButton from "../buttons/LogoutButton";
 
 const MobileProductsAccordion = ({
   section,
@@ -107,24 +105,18 @@ const Navbar = () => {
     document.body.style.overflow = open ? "hidden" : "auto";
   }, [open]);
 
-  const { user } = useAuth();
-
   return (
     <nav className="-ml-0.5 fixed top-0 left-0 w-full h-16 border-b shadow-2xs flex items-center justify-between px-5 md:px-34 z-20 bg-background">
       {open && (
         <div className="w-full fixed top-16 inset-0 py-8 z-50 dark:bg-black/80 bg-background  dark:backdrop-blur-lg px-5 flex md:hidden flex-col gap-10 overflow-y-auto">
           <div className="w-full flex flex-col items-center justify-center gap-3">
-            {user ? (
-              <LogoutButton className="text-base py-2 px-8" />
-            ) : (
-              <Button
-                size={"lg"}
-                className="w-full text-base py-2 px-8 dark:text-white hover:bg-hover transition-all duration-200 ease-in-out"
-                onClick={() => navigate("/login")}
-              >
-                Login
-              </Button>
-            )}
+            <Button
+              size={"lg"}
+              className="w-full text-base py-2 px-8 dark:text-white hover:bg-hover transition-all duration-200 ease-in-out"
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </Button>
             <Button
               size={"lg"}
               variant={"link"}
@@ -157,17 +149,13 @@ const Navbar = () => {
 
       <div className="h-full w-fit flex items-center justify-center gap-3 md:gap-2">
         <AnimatedThemeToggler />
-        {user ? (
-          <LogoutButton className="w-fit hidden md:flex" />
-        ) : (
-          <Button
-            variant={"ghost"}
-            className="hidden md:flex text-muted-foreground"
-            asChild
-          >
-            <Link to={"/login"}>Log in</Link>
-          </Button>
-        )}
+        <Button
+          variant={"ghost"}
+          className="hidden md:flex text-muted-foreground"
+          asChild
+        >
+          <Link to={"/login"}>Log in</Link>
+        </Button>
 
         <InteractiveHoverButton className="font-heading hidden md:flex">
           Get Started

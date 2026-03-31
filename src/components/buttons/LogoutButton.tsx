@@ -40,10 +40,10 @@ const LogoutButton = ({
         size={size}
         onClick={handleLogout}
         disabled={loading}
-        className={cn("w-full text-sm", className)}
+        className={cn("text-sm", className)}
       >
         {loading ? (
-          <div className="flex items-center justify-center gap-2">
+          <div className="flex items-center justify-center gap-2 text-sm">
             <Spinner />
             Logging out...
           </div>

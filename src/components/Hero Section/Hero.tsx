@@ -1,15 +1,11 @@
 import { InteractiveHoverButton } from "../ui/interactive-hover-button";
 import { Button } from "../ui/button";
-import { useAuth } from "@/context/AuthContext";
 const Hero = () => {
-  const { user } = useAuth();
   return (
     <div className="h-[90vh] w-full overflow-hidden relative flex flex-col items-center justify-center gap-7">
       <h1 className="font-heading text-7xl text-center font-semibold max-w-5xl leading-16">
         The personal finance system for clarity and control
       </h1>
-
-      <h1>Welcome {user?.name ?? "User"}</h1>
 
       <p className="dark:text-muted-foreground">
         Understand your spending, stay on budget, and plan ahead — all without

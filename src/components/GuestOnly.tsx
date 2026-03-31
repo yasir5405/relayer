@@ -1,10 +1,11 @@
 import { useAuth } from "@/context/AuthContext";
-import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { Spinner } from "./ui/spinner";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 
-const ProtectedRoute = () => {
+const GuestOnly = () => {
   const { user, loading } = useAuth();
   const location = useLocation();
+  const from = location.state?.from ?? "/dashboard";
 
   if (loading) {
     return (
@@ -14,12 +15,10 @@ const ProtectedRoute = () => {
     );
   }
 
-  if (!user) {
-    return (
-      <Navigate to={"/login"} state={{ from: location.pathname }} replace />
-    );
+  if (user) {
+    return <Navigate to={from} replace />;
   }
   return <Outlet />;
 };
 
-export default ProtectedRoute;
+export default GuestOnly;
