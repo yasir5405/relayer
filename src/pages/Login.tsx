@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Link, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import {
   InputGroup,
   InputGroupAddon,
@@ -16,26 +16,74 @@ import {
 } from "@/components/ui/input-group";
 import { IconEye, IconEyeClosed } from "@tabler/icons-react";
 import { useState } from "react";
-
-export type LoginParams = {
-  email: string;
-  password: string;
-};
+import { login, type LoginParams } from "@/api/auth.api";
+import { toast } from "sonner";
+import { Spinner } from "@/components/ui/spinner";
+import { useAuth } from "@/context/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
-    formState: { isValid },
+    setError,
+    formState: { isValid, errors },
   } = useForm<LoginParams>({
     mode: "onChange",
   });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = (data: LoginParams) => {
-    console.log(data);
+  const { refreshUser } = useAuth();
+
+  const handleLogin: SubmitHandler<LoginParams> = async (data: LoginParams) => {
+    setLoading(true);
+
+    try {
+      const res = await login(data);
+
+      if (!res.success) {
+        const message = res.error?.message ?? res.message;
+
+        if (message.toLocaleLowerCase().includes("email")) {
+          setError("email", {
+            type: "server",
+            message,
+          });
+        } else if (message.toLocaleLowerCase().includes("password")) {
+          setError("password", {
+            type: "server",
+            message,
+          });
+        } else {
+          setError("root", {
+            type: "server",
+            message,
+          });
+        }
+
+        // toast.error(message);
+        // console.log(message);
+        setLoading(false);
+        return;
+      }
+
+      localStorage.setItem("access-token", String(res.data?.accessToken));
+      toast.success(res.message);
+      await refreshUser();
+      navigate("/");
+    } catch (error) {
+      setError("root", {
+        type: "server",
+        message: "Network error. Please try again.",
+      });
+      toast.error("Network error or server unreachable");
+      console.log("Unexpected error", error);
+      console.log("Network error or server unreachable");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -80,6 +128,11 @@ const Login = () => {
                     className="py-6 px-5 rounded-2xl"
                     {...register("email", { required: true })}
                   />
+                  {errors.email && (
+                    <p className="text-xs text-red-500">
+                      {errors.email?.message}
+                    </p>
+                  )}
                 </Field>
                 <Field>
                   <div className="w-full flex justify-between">
@@ -121,15 +174,33 @@ const Login = () => {
                       )}
                     </InputGroupAddon>
                   </InputGroup>
+                  {errors.password && (
+                    <p className="text-xs text-red-500">
+                      {errors.password?.message}
+                    </p>
+                  )}
                 </Field>
+
+                {errors.root?.message && (
+                  <p className="text-xs text-red-500 text-center">
+                    {errors.root.message}
+                  </p>
+                )}
 
                 <Field>
                   <Button
                     className="py-6 px-5 rounded-2xl text-base"
                     type="submit"
-                    disabled={!isValid}
+                    disabled={!isValid || loading}
                   >
-                    Log In
+                    {loading ? (
+                      <div className="flex items-center justify-center gap-2">
+                        <Spinner />
+                        Logging in...
+                      </div>
+                    ) : (
+                      <>Log In</>
+                    )}
                   </Button>
                 </Field>
 

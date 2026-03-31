@@ -1,0 +1,58 @@
+import { fetchUser, type User } from "@/api/auth.api";
+import { createContext, useContext, useEffect, useState } from "react";
+import { toast } from "sonner";
+
+type AuthContextType = {
+  user: User | null;
+  loading: boolean;
+  refreshUser: () => Promise<void>;
+};
+
+const AuthContext = createContext<AuthContextType | null>(null);
+
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const refreshUser = async (silent = false) => {
+    const token = localStorage.getItem("access-token");
+
+    if (!token) {
+      setUser(null);
+      return;
+    }
+
+    const res = await fetchUser();
+
+    if (res.success) {
+      setUser(res.data);
+    } else {
+      setUser(null);
+      localStorage.removeItem("access-token");
+
+      if (!silent) {
+        toast.error(res.error?.message ?? res.message ?? "Session expired");
+      }
+    }
+  };
+
+  useEffect(() => {
+    (async () => {
+      await refreshUser();
+      setLoading(false);
+    })();
+  }, []);
+  return (
+    <AuthContext.Provider value={{ loading, refreshUser, user }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export const useAuth = () => {
+  const ctx = useContext(AuthContext);
+  if (!ctx) {
+    throw new Error("useAuth must be used inside AuthProvidor");
+  }
+  return ctx;
+};
