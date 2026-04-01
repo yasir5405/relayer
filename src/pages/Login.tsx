@@ -144,7 +144,7 @@ const Login = () => {
                     </FieldLabel>
 
                     <Link
-                      to={"/forgot-password"}
+                      to={"/reset-password"}
                       className="text-sm hover:text-muted-foreground transition-all duration-200 ease-in-out"
                     >
                       Forgot your password?

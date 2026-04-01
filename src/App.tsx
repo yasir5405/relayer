@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import LandingLayout from "./layouts/LandingLayout";
-import { Dashboard, Home, Login, Signup } from "./pages";
+import { Dashboard, Home, Login, ResetPassword, Signup } from "./pages";
 import AuthLayout from "./layouts/AuthLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import GuestOnly from "./components/GuestOnly";
@@ -22,6 +22,7 @@ const App = () => {
         <Route element={<GuestOnly />}>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
         </Route>
       </Route>
     </Routes>

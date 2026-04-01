@@ -46,10 +46,10 @@ api.interceptors.response.use(
     const originalRequest = error.config;
 
     const is401 = error.response?.status === 401;
-    const isRefreshRoute = originalRequest.url?.includes("/auth/refresh-token");
+    const isAuthRoute = originalRequest.url?.includes("/auth/");
     const alreadyRetried = originalRequest._retry;
 
-    if (!is401 || isRefreshRoute || alreadyRetried) {
+    if (!is401 || isAuthRoute || alreadyRetried) {
       return Promise.reject(error);
     }
 
@@ -85,6 +85,5 @@ api.interceptors.response.use(
     }
   },
 );
-
 
 export default api;

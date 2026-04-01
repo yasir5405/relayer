@@ -28,6 +28,16 @@ export type User = {
   id: number;
 };
 
+export type ForgotPasswordParams = {
+  email: string;
+};
+
+export type ResetPasswordParams = {
+  email: string;
+  otp: string;
+  newPassword: string;
+};
+
 export const signup = async (
   data: SignupParams,
 ): Promise<ApiResponse<null>> => {
@@ -122,6 +132,68 @@ export const fetchUser = async (): Promise<ApiResponse<User>> => {
 export const logout = async (): Promise<ApiResponse<null>> => {
   try {
     const res = await api.post("/auth/logout");
+    return res.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return (
+        error.response?.data ?? {
+          data: null,
+          message: "Logout failed",
+          success: false,
+          error: {
+            message: "Server did not respond",
+          },
+        }
+      );
+    }
+
+    return {
+      data: null,
+      message: "Logout failed",
+      success: false,
+      error: {
+        message: "Server did not respond",
+      },
+    };
+  }
+};
+
+export const sendResetPasswordOtp = async (
+  data: ForgotPasswordParams,
+): Promise<ApiResponse<null>> => {
+  try {
+    const res = await api.post("/auth/forgot-password", data);
+    return res.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return (
+        error.response?.data ?? {
+          data: null,
+          message: "Logout failed",
+          success: false,
+          error: {
+            message: "Server did not respond",
+          },
+        }
+      );
+    }
+
+    return {
+      data: null,
+      message: "Logout failed",
+      success: false,
+      error: {
+        message: "Server did not respond",
+      },
+    };
+  }
+};
+
+export const resetPassword = async (
+  data: ResetPasswordParams,
+): Promise<ApiResponse<null>> => {
+  try {
+    const res = await api.post("/auth/reset-password", data);
     return res.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
