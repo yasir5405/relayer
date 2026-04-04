@@ -16,9 +16,11 @@ import {
 } from "@/components/ui/input-group";
 import { IconEye, IconEyeClosed } from "@tabler/icons-react";
 import { useState } from "react";
-import { signup, type SignupParams } from "@/api/auth.api";
+import { loginWithGoogle, signup, type SignupParams } from "@/api/auth.api";
 import { toast } from "sonner";
 import { Spinner } from "@/components/ui/spinner";
+import { useGoogleLogin, type CodeResponse } from "@react-oauth/google";
+import { useAuth } from "@/context/AuthContext";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -30,9 +32,12 @@ const Signup = () => {
   } = useForm<SignupParams>({
     mode: "onChange",
   });
+  const { refreshUser } = useAuth();
 
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [googleError, setGoogleError] = useState("");
+  const [googleLoading, setGoogleLoading] = useState(false);
 
   const handleSignup: SubmitHandler<SignupParams> = async (
     data: SignupParams,
@@ -85,6 +90,57 @@ const Signup = () => {
       setLoading(false);
     }
   };
+
+  const googleResponse = async (
+    authResult: Omit<CodeResponse, "error" | "error_description" | "error_uri">,
+  ) => {
+    try {
+      if (authResult["code"]) {
+        const code = authResult["code"];
+        const res = await loginWithGoogle(code);
+
+        if (!res.success) {
+          const message = res.error?.message ?? res.message;
+
+          setGoogleError(message);
+          return;
+        }
+
+        localStorage.setItem("access-token", String(res.data?.accessToken));
+        toast.success(res.message);
+        await refreshUser();
+        navigate("/dashboard");
+      } else {
+        setGoogleError("Google login failed. Please try again.");
+      }
+    } catch (error) {
+      console.log("Google login failed. ", error);
+      toast.error("Network error or server unreachable");
+      console.log("Unexpected error", error);
+      console.log("Network error or server unreachable");
+    } finally {
+      setGoogleLoading(false);
+    }
+  };
+
+  const handleGoogleError = (
+    error: Pick<CodeResponse, "error" | "error_description" | "error_uri">,
+  ) => {
+    console.error("Google login error:", error);
+
+    setGoogleLoading(false);
+
+    setGoogleError(
+      error.error_description || "Google login cancelled or failed",
+    );
+  };
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: googleResponse,
+    onError: handleGoogleError,
+    flow: "auth-code",
+    select_account: true,
+  });
 
   return (
     <>
@@ -195,6 +251,12 @@ const Signup = () => {
                   </p>
                 )}
 
+                {googleError && (
+                  <p className="text-xs text-red-500 text-center">
+                    {googleError}
+                  </p>
+                )}
+
                 <Field>
                   <Button
                     className="py-6 px-5 rounded-2xl text-base"
@@ -220,17 +282,29 @@ const Signup = () => {
                       className="py-6 px-5 rounded-2xl"
                       variant="outline"
                       type="button"
+                      onClick={() => {
+                        setGoogleError("");
+                        setGoogleLoading(true);
+                        googleLogin();
+                      }}
+                      disabled={googleLoading}
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"
-                          fill="currentColor"
-                        />
-                      </svg>
-                      Continue with Google
+                      {googleLoading ? (
+                        <Spinner />
+                      ) : (
+                        <>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"
+                              fill="currentColor"
+                            />
+                          </svg>
+                          Continue with Google
+                        </>
+                      )}
                     </Button>
                   </Field>
                   <Field>
