@@ -219,3 +219,34 @@ export const resetPassword = async (
     };
   }
 };
+
+export const loginWithGoogle = async (
+  code: string,
+): Promise<ApiResponse<LoginResponse>> => {
+  try {
+    const res = await api.get(`/google?code=${code}`);
+    return res.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return (
+        error.response?.data ?? {
+          data: null,
+          message: "Logout failed",
+          success: false,
+          error: {
+            message: "Server did not respond",
+          },
+        }
+      );
+    }
+
+    return {
+      data: null,
+      message: "Logout failed",
+      success: false,
+      error: {
+        message: "Server did not respond",
+      },
+    };
+  }
+};
