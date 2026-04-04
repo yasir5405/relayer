@@ -135,6 +135,7 @@ const Login = () => {
     onSuccess: googleResponse,
     onError: handleGoogleError,
     flow: "auth-code",
+    select_account: true,
   });
 
   return (
