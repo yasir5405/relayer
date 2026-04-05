@@ -152,7 +152,7 @@ const Login = () => {
 
           <div className="w-full md:min-w-md flex justify-center flex-col py-2 gap-6">
             <div>
-              <h1 className="font-heading text-3xl font-semibold text-center">
+              <h1 className="font-heading tracking-tighter text-3xl font-semibold text-center">
                 Log in to Sumptuo
               </h1>
 

@@ -27,7 +27,6 @@ const LogoutButton = ({
       await logoutUser();
 
       // toast.success("Logged out successfully");
-
       navigate("/", { replace: true });
     } catch {
       toast.error("Error while logging out. Please try again");

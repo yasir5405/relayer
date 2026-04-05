@@ -19,32 +19,37 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     if (!token) {
       setUser(null);
+      setLoading(false);
       return;
     }
 
-    const res = await fetchUser();
-
-    if (res.success) {
-      setUser(res.data);
-      return;
-    }
-
-    if (res.error?.code === 401) {
-      setUser(null);
-      localStorage.removeItem("access-token");
+    try {
+      const res = await fetchUser();
+      if (res.success) {
+        setUser(res.data);
+        setLoading(false);
+        return;
+      } else if (res.error?.code === 401) {
+        setUser(null);
+        localStorage.removeItem("access-token");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const logoutUser = async () => {
     await logout();
     setUser(null);
+    setLoading(false);
     localStorage.removeItem("access-token");
   };
 
   useEffect(() => {
     (async () => {
       await refreshUser();
-      setLoading(false);
     })();
   }, []);
   return (

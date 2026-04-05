@@ -1,11 +1,9 @@
 import { useAuth } from "@/context/AuthContext";
 import { Spinner } from "./ui/spinner";
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 const GuestOnly = () => {
   const { user, loading } = useAuth();
-  const location = useLocation();
-  const from = location.state?.from ?? "/dashboard";
 
   if (loading) {
     return (
@@ -16,7 +14,7 @@ const GuestOnly = () => {
   }
 
   if (user) {
-    return <Navigate to={from} replace />;
+    return <Navigate to={"/dashboard"} replace />;
   }
   return <Outlet />;
 };
