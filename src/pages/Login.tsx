@@ -136,6 +136,7 @@ const Login = () => {
     onError: handleGoogleError,
     flow: "auth-code",
     select_account: true,
+    include_granted_scopes: true,
   });
 
   return (

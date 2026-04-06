@@ -26,6 +26,7 @@ export type User = {
   createdAt: Date;
   updatedAt: Date;
   id: number;
+  profileImage?: string;
 };
 
 export type ForgotPasswordParams = {
