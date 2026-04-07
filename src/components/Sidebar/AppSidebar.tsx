@@ -8,9 +8,9 @@ import {
 } from "../ui/sidebar";
 import AccountSwitcher from "./AccountSwitcher";
 import AdIntegration from "./AdIntegration";
-import DashboardOverview from "./DashboardOverview";
 import SidebarAnalytics from "./SidebarAnalytics";
 import SidebarCampaigns from "./SidebarCampaigns";
+import SidebarOverview from "./SIdebarOverview";
 import SidebarSettings from "./SidebarSettings";
 import SidebarUser from "./SidebarUser";
 
@@ -26,7 +26,7 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
 
         <SidebarSeparator />
 
-        <DashboardOverview />
+        <SidebarOverview />
 
         <SidebarAnalytics />
 

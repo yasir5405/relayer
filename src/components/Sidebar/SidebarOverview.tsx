@@ -8,7 +8,7 @@ import {
 } from "../ui/sidebar";
 import { NavLink, useLocation } from "react-router-dom";
 
-const DashboardOverview = () => {
+const SidebarOverview = () => {
   const { pathname } = useLocation();
   return (
     <SidebarGroup>
@@ -27,4 +27,4 @@ const DashboardOverview = () => {
   );
 };
 
-export default DashboardOverview;
+export default SidebarOverview;

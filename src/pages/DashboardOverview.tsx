@@ -1,8 +1,11 @@
+import OverviewCampaignList from "@/components/Dashboard/OverviewCampaignList";
 
 const DashboardOverview = () => {
   return (
-    <div>DashboardOverview</div>
-  )
-}
+    <div className="w-full h-fit flex flex-col">
+      <OverviewCampaignList />
+    </div>
+  );
+};
 
-export default DashboardOverview
+export default DashboardOverview;

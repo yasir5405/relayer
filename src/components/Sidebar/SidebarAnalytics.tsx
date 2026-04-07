@@ -13,7 +13,7 @@ import {
 } from "../ui/sidebar";
 import { NavLink, useLocation } from "react-router-dom";
 
-const SidebarAnalytics = () => {
+const SidebarCampaigns = () => {
   const campaignSidebarList: {
     title: string;
     url: string;
@@ -46,12 +46,7 @@ const SidebarAnalytics = () => {
         {campaignSidebarList.map((item) => (
           <SidebarMenuItem key={item.title}>
             <SidebarMenuButton asChild isActive={pathname === item.url}>
-              <NavLink
-                to={item.url}
-                className={({ isActive }) =>
-                  `text-xs ${isActive ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium" : ""}`
-                }
-              >
+              <NavLink to={item.url} className="text-xs">
                 {item.icon && <item.icon />}
                 <span>{item.title}</span>
               </NavLink>
@@ -63,4 +58,4 @@ const SidebarAnalytics = () => {
   );
 };
 
-export default SidebarAnalytics;
+export default SidebarCampaigns;

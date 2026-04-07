@@ -12,7 +12,7 @@ import {
 } from "../ui/sidebar";
 import { NavLink, useLocation } from "react-router-dom";
 
-const SidebarCampaigns = () => {
+const SidebarAnalytics = () => {
   const campaignSidebarList: {
     title: string;
     url: string;
@@ -53,4 +53,4 @@ const SidebarCampaigns = () => {
   );
 };
 
-export default SidebarCampaigns;
+export default SidebarAnalytics;

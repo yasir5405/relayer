@@ -29,6 +29,16 @@ export type AdAccountSummaryResponse = {
   ctr: number;
 };
 
+export type Campaign = {
+  id: number;
+  name: string;
+  status: "ENABLED" | "PAUSED" | "REMOVED";
+  spend: number;
+  impressions: number;
+  clicks: number;
+  ctr: number;
+};
+
 export const fetchGoogleAdsAccounts = async (
   code: string,
 ): Promise<ApiResponse<fetchGoogleAdsAccountsResponse>> => {
@@ -128,6 +138,37 @@ export const getGoogleAdAccountSummary = async (
 ): Promise<ApiResponse<AdAccountSummaryResponse>> => {
   try {
     const res = await api.get(`/google/summary?accountId=${accountId}`);
+    return res.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return (
+        error.response?.data ?? {
+          data: null,
+          message: "Logout failed",
+          success: false,
+          error: {
+            message: "Server did not respond",
+          },
+        }
+      );
+    }
+
+    return {
+      data: null,
+      message: "Logout failed",
+      success: false,
+      error: {
+        message: "Server did not respond",
+      },
+    };
+  }
+};
+
+export const getAllCampaignsOfGoogleCLientId = async (
+  accountId: string,
+): Promise<ApiResponse<Campaign[]>> => {
+  try {
+    const res = await api.get(`/google/campaigns?accountId=${accountId}`);
     return res.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

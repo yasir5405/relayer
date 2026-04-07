@@ -8,7 +8,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "../ui/sidebar";
+import {
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  useSidebar,
+} from "../ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useAuth } from "@/context/AuthContext";
 import {
@@ -39,6 +44,7 @@ const SidebarUser = () => {
     }
     setLoading(false);
   };
+  const { isMobile } = useSidebar();
   return (
     <>
       <GlobalLoader isLoading={loading} message="" />
@@ -66,7 +72,7 @@ const SidebarUser = () => {
 
             <DropdownMenuContent
               className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
-              side={"bottom"}
+              side={isMobile ? "bottom" : "right"}
               align="end"
               sideOffset={4}
             >

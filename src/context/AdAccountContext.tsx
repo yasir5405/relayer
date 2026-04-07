@@ -5,6 +5,8 @@ import {
 import { createContext, useContext, useEffect, useState } from "react";
 import { useAuth } from "./AuthContext";
 
+const STORAGE_KEY = "selectedAdAccountId";
+
 type AdAccountContextType = {
   adAccounts: SavedAdAccount[];
   selectedAdAccount: SavedAdAccount | null;
@@ -18,9 +20,14 @@ const AdAccountContext = createContext<AdAccountContextType | null>(null);
 const AdAccountProvider = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAuth();
   const [adAccounts, setAdAccounts] = useState<SavedAdAccount[]>([]);
-  const [selectedAdAccount, setSelectedAdAccount] =
+  const [selectedAdAccount, setSelectedAdAccountState] =
     useState<SavedAdAccount | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const setSelectedAdAccount = (acc: SavedAdAccount) => {
+    localStorage.setItem(STORAGE_KEY, String(acc.id));
+    setSelectedAdAccountState(acc);
+  };
 
   const refreshAdAccounts = async () => {
     try {
@@ -43,7 +50,7 @@ const AdAccountProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     if (!user) {
       setAdAccounts([]);
-      setSelectedAdAccount(null);
+      setSelectedAdAccountState(null);
       setLoading(false);
       return;
     }
@@ -52,9 +59,14 @@ const AdAccountProvider = ({ children }: { children: React.ReactNode }) => {
   }, [user]);
 
   useEffect(() => {
-    if (adAccounts.length > 0) {
-      setSelectedAdAccount((prev) => prev ?? adAccounts[0]);
-    }
+    if (adAccounts.length === 0) return;
+
+    const savedId = localStorage.getItem(STORAGE_KEY);
+    const savedAccount = savedId
+      ? adAccounts.find((acc) => acc.id === Number(savedId))
+      : null;
+
+    setSelectedAdAccountState(savedAccount ?? adAccounts[0]);
   }, [adAccounts, selectedAdAccount]);
 
   return (

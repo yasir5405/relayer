@@ -13,9 +13,26 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 const Dashboard = () => {
+  const location = useLocation();
+
+  const pathnames = location.pathname.split("/").filter(Boolean);
+
+  const breadcrumbs = pathnames.map((value, index) => {
+    const to = "/" + pathnames.slice(0, index + 1).join("/");
+
+    return {
+      name: value,
+      path: to,
+      isLast: index === pathnames.length - 1,
+    };
+  });
+
+  const formatName = (name: string) => {
+    return name.charAt(0).toUpperCase() + name.slice(1);
+  };
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -30,20 +47,28 @@ const Dashboard = () => {
             />
             <Breadcrumb>
               <BreadcrumbList>
-                <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">
-                    Build Your Application
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator className="hidden md:block" />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                </BreadcrumbItem>
+                {breadcrumbs.map((crumb) => (
+                  <div key={crumb.path} className="flex items-center">
+                    <BreadcrumbItem className="hidden md:block">
+                      {crumb.isLast ? (
+                        <BreadcrumbPage>
+                          {formatName(crumb.name)}
+                        </BreadcrumbPage>
+                      ) : (
+                        <BreadcrumbLink href={crumb.path}>
+                          {formatName(crumb.name)}
+                        </BreadcrumbLink>
+                      )}
+                    </BreadcrumbItem>
+                    {!crumb.isLast && <BreadcrumbSeparator />}
+                  </div>
+                ))}
               </BreadcrumbList>
             </Breadcrumb>
           </div>
         </header>
-        <div className="">
+        <Separator />
+        <div className="px-4 py-3">
           <Outlet />
         </div>
       </SidebarInset>
