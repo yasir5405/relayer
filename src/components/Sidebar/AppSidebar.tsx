@@ -10,7 +10,7 @@ import AccountSwitcher from "./AccountSwitcher";
 import AdIntegration from "./AdIntegration";
 import SidebarAnalytics from "./SidebarAnalytics";
 import SidebarCampaigns from "./SidebarCampaigns";
-import SidebarOverview from "./SIdebarOverview";
+import SidebarOverview from "./SidebarOverview";
 import SidebarSettings from "./SidebarSettings";
 import SidebarUser from "./SidebarUser";
 
