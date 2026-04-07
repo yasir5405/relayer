@@ -315,7 +315,7 @@ const AccountSwitcher = () => {
             )}
           </div>
 
-          <DialogFooter className="gap-2 sm:gap-0">
+          <DialogFooter className="flex gap-2 items-center justify-center">
             <Button
               variant="outline"
               onClick={() => setDialogOpen(false)}

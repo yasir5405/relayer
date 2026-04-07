@@ -9,7 +9,7 @@ export type SavedAdAccount = {
   platform: "GOOGLE" | "META";
 };
 
-export type AdAccount = { id: string; name: string };
+export type AdAccount = { id: string; name: string; mccId: string };
 
 export type GoogleAdsTokens = {
   accessToken: string;
@@ -20,6 +20,13 @@ export type GoogleAdsTokens = {
 export type fetchGoogleAdsAccountsResponse = {
   accounts: AdAccount[];
   tokens: GoogleAdsTokens;
+};
+
+export type AdAccountSummaryResponse = {
+  spend: number;
+  impressions: number;
+  clicks: number;
+  ctr: number;
 };
 
 export const fetchGoogleAdsAccounts = async (
@@ -90,6 +97,37 @@ export const fetchConnectedGoogleAdAccounts = async (): Promise<
 > => {
   try {
     const res = await api.get("/google/connected-accounts");
+    return res.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return (
+        error.response?.data ?? {
+          data: null,
+          message: "Logout failed",
+          success: false,
+          error: {
+            message: "Server did not respond",
+          },
+        }
+      );
+    }
+
+    return {
+      data: null,
+      message: "Logout failed",
+      success: false,
+      error: {
+        message: "Server did not respond",
+      },
+    };
+  }
+};
+
+export const getGoogleAdAccountSummary = async (
+  accountId: string,
+): Promise<ApiResponse<AdAccountSummaryResponse>> => {
+  try {
+    const res = await api.get(`/google/summary?accountId=${accountId}`);
     return res.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
