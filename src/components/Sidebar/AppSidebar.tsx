@@ -10,6 +10,7 @@ import DashboardOverview from "./DashboardOverview";
 import SidebarAnalytics from "./SidebarAnalytics";
 import SidebarCampaigns from "./SidebarCampaigns";
 import SidebarSettings from "./SidebarSettings";
+import SidebarUser from "./SidebarUser";
 
 const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
   return (
@@ -24,10 +25,12 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
         <SidebarAnalytics />
 
         <SidebarCampaigns />
+
+        <SidebarSettings className="mt-auto" />
       </SidebarContent>
 
       <SidebarFooter>
-        <SidebarSettings />
+        <SidebarUser />
       </SidebarFooter>
 
       <SidebarRail />

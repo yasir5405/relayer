@@ -8,8 +8,12 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "../ui/sidebar";
-import { IconBrandGoogle, IconBrandMeta } from "@tabler/icons-react";
+import {
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  useSidebar,
+} from "../ui/sidebar";
 import { useAdAccount } from "@/context/AdAccountContext";
 import { Spinner } from "../ui/spinner";
 import { useRef, useState } from "react";
@@ -34,6 +38,8 @@ import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import GlobalLoader from "../GlobalLoader";
+import GoogleLogo from "../GoogleLogo";
+import FacebookLogo from "../FacebookLogo";
 
 const AccountSwitcher = () => {
   const {
@@ -149,6 +155,8 @@ const AccountSwitcher = () => {
     }
   };
 
+  const { isMobile } = useSidebar();
+
   return (
     <>
       <GlobalLoader
@@ -175,9 +183,9 @@ const AccountSwitcher = () => {
                   <>
                     <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-accent text-sidebar-primary-foreground">
                       {selectedAdAccount.platform === "GOOGLE" ? (
-                        <IconBrandGoogle className="size-4" />
+                        <GoogleLogo />
                       ) : (
-                        <IconBrandMeta className="size-4" />
+                        <FacebookLogo />
                       )}
                     </div>
                     <div className="grid flex-1 text-left text-sm leading-tight">
@@ -212,7 +220,7 @@ const AccountSwitcher = () => {
             <DropdownMenuContent
               className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
               align="start"
-              side="bottom"
+              side={isMobile ? "bottom" : "right"}
               sideOffset={4}
             >
               <DropdownMenuLabel className="text-xs text-muted-foreground">
@@ -234,9 +242,9 @@ const AccountSwitcher = () => {
                   >
                     <div className="flex size-6 items-center justify-center rounded-md border">
                       {acc.platform === "GOOGLE" ? (
-                        <IconBrandGoogle className="size-3.5 shrink-0" />
+                        <GoogleLogo />
                       ) : (
-                        <IconBrandMeta className="size-3.5 shrink-0" />
+                        <FacebookLogo />
                       )}
                     </div>
                     {acc.adAccountName}
@@ -278,7 +286,13 @@ const AccountSwitcher = () => {
             </DialogDescription>
           </DialogHeader>
 
-          <div className="flex flex-col gap-3 py-2 max-h-72 overflow-y-auto">
+          <div
+            className="flex flex-col gap-3 py-2 max-h-72"
+            style={{
+              overflowY:
+                fetchedGoogleAdAccountFromGoogle.length > 3 ? "auto" : "hidden",
+            }}
+          >
             {fetchedGoogleAdAccountFromGoogle.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-4">
                 No accounts found.
@@ -298,7 +312,7 @@ const AccountSwitcher = () => {
                   />
 
                   <div className="flex size-7 items-center justify-center rounded-md border bg-muted">
-                    <IconBrandGoogle className="size-4" />
+                    <GoogleLogo />
                   </div>
 
                   <Label
