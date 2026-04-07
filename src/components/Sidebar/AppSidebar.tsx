@@ -4,8 +4,10 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
+  SidebarSeparator,
 } from "../ui/sidebar";
 import AccountSwitcher from "./AccountSwitcher";
+import AdIntegration from "./AdIntegration";
 import DashboardOverview from "./DashboardOverview";
 import SidebarAnalytics from "./SidebarAnalytics";
 import SidebarCampaigns from "./SidebarCampaigns";
@@ -19,7 +21,11 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
         <AccountSwitcher />
       </SidebarHeader>
 
-      <SidebarContent>
+      <SidebarContent className="mt-1">
+        <AdIntegration />
+
+        <SidebarSeparator />
+
         <DashboardOverview />
 
         <SidebarAnalytics />

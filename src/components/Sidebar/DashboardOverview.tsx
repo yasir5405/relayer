@@ -6,16 +6,20 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "../ui/sidebar";
+import { NavLink, useLocation } from "react-router-dom";
 
 const DashboardOverview = () => {
+  const { pathname } = useLocation();
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Overview</SidebarGroupLabel>
       <SidebarMenu>
         <SidebarMenuItem>
-          <SidebarMenuButton>
-            <LayoutDashboard />
-            <span>Dashboard</span>
+          <SidebarMenuButton asChild isActive={pathname === "/dashboard"}>
+            <NavLink to={"/dashboard"} className="text-xs">
+              <LayoutDashboard />
+              <span>Dashboard</span>
+            </NavLink>
           </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarMenu>

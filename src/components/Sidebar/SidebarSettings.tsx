@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -28,17 +28,18 @@ const SidebarSettings = ({
       icon: IconSearch,
     },
   ];
+  const { pathname } = useLocation();
   return (
     <SidebarGroup {...props}>
       <SidebarGroupContent>
         <SidebarMenu>
           {data.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton asChild>
-                <Link to={item.url}>
+              <SidebarMenuButton asChild isActive={pathname === item.url}>
+                <NavLink to={item.url} className="text-xs">
                   <item.icon />
                   <span>{item.title}</span>
-                </Link>
+                </NavLink>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}

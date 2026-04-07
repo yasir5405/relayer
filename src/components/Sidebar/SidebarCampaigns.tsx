@@ -10,7 +10,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "../ui/sidebar";
-import { Link } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 const SidebarCampaigns = () => {
   const campaignSidebarList: {
@@ -31,6 +31,8 @@ const SidebarCampaigns = () => {
       icon: IconFileAnalytics,
     },
   ];
+
+  const { pathname } = useLocation();
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Analytics</SidebarGroupLabel>
@@ -38,11 +40,11 @@ const SidebarCampaigns = () => {
       <SidebarMenu>
         {campaignSidebarList.map((item) => (
           <SidebarMenuItem key={item.title}>
-            <SidebarMenuButton asChild>
-              <Link to={item.url}>
+            <SidebarMenuButton asChild isActive={pathname === item.url}>
+              <NavLink to={item.url} className="text-xs">
                 {item.icon && <item.icon />}
                 <span>{item.title}</span>
-              </Link>
+              </NavLink>
             </SidebarMenuButton>
           </SidebarMenuItem>
         ))}

@@ -11,7 +11,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "../ui/sidebar";
-import { Link } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 const SidebarAnalytics = () => {
   const campaignSidebarList: {
@@ -22,21 +22,22 @@ const SidebarAnalytics = () => {
   }[] = [
     {
       title: "All Campaigns",
-      url: "/all-campaigns",
+      url: "/dashboard/all-campaigns",
       icon: IconTargetArrow,
       isActive: true,
     },
     {
       title: "Ad Groups",
-      url: "/ad-groups",
+      url: "/dashboard/ad-groups",
       icon: IconLayoutGrid,
     },
     {
       title: "Ads",
-      url: "/ads",
+      url: "/dashboard/ads",
       icon: IconPhoto,
     },
   ];
+  const { pathname } = useLocation();
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Campaigns</SidebarGroupLabel>
@@ -44,11 +45,16 @@ const SidebarAnalytics = () => {
       <SidebarMenu>
         {campaignSidebarList.map((item) => (
           <SidebarMenuItem key={item.title}>
-            <SidebarMenuButton asChild>
-              <Link to={item.url}>
+            <SidebarMenuButton asChild isActive={pathname === item.url}>
+              <NavLink
+                to={item.url}
+                className={({ isActive }) =>
+                  `text-xs ${isActive ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium" : ""}`
+                }
+              >
                 {item.icon && <item.icon />}
                 <span>{item.title}</span>
-              </Link>
+              </NavLink>
             </SidebarMenuButton>
           </SidebarMenuItem>
         ))}

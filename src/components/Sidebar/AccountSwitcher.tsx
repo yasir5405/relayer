@@ -181,18 +181,20 @@ const AccountSwitcher = () => {
                   </div>
                 ) : selectedAdAccount ? (
                   <>
-                    <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-accent text-sidebar-primary-foreground">
+                    <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-accent text-sidebar-primary-foreground relative">
                       {selectedAdAccount.platform === "GOOGLE" ? (
                         <GoogleLogo />
                       ) : (
                         <FacebookLogo />
                       )}
+
+                      <div className="absolute bottom-0 right-0 h-2 w-2 rounded-full bg-green-500"></div>
                     </div>
                     <div className="grid flex-1 text-left text-sm leading-tight">
                       <span className="truncate font-medium">
                         {selectedAdAccount.adAccountName}
                       </span>
-                      <span className="truncate text-xs">
+                      <span className="truncate text-xs text-muted-foreground">
                         {new Date(selectedAdAccount.createdAt).toDateString()}
                       </span>
                     </div>
@@ -311,7 +313,7 @@ const AccountSwitcher = () => {
                     onClick={(e) => e.stopPropagation()} // prevent double-toggle from row click
                   />
 
-                  <div className="flex size-7 items-center justify-center rounded-md border bg-muted">
+                  <div className="flex size-5 items-center justify-center rounded-md">
                     <GoogleLogo />
                   </div>
 
