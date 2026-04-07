@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { getAllCampaignsOfGoogleCLientId, type Campaign } from "@/api/ad.api";
 import CampaignListItemSkeleton from "../Skeletons/CampaignListItemSkeleton";
+import EmptyCampaign from "../Empty/EmptyCampaign";
 
 const OverviewCampaignList = () => {
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
@@ -51,13 +52,17 @@ const OverviewCampaignList = () => {
       </div>
 
       <div className="w-full border min-h-80 rounded-xl flex flex-col">
-        {loading
-          ? Array.from({ length: 3 }).map((_, i) => (
-              <CampaignListItemSkeleton key={i} />
-            ))
-          : campaigns.map((campaign) => (
-              <CampaignListItem key={campaign.id} {...campaign} />
-            ))}
+        {loading ? (
+          Array.from({ length: 3 }).map((_, i) => (
+            <CampaignListItemSkeleton key={i} />
+          ))
+        ) : campaigns.length === 0 ? (
+          <EmptyCampaign />
+        ) : (
+          campaigns.map((campaign) => (
+            <CampaignListItem key={campaign.id} {...campaign} />
+          ))
+        )}
       </div>
     </div>
   );

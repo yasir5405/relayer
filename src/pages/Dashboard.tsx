@@ -43,7 +43,7 @@ const Dashboard = () => {
             <SidebarTrigger className="-ml-1" />
             <Separator
               orientation="vertical"
-              className="mr-2 data-[orientation=vertical]:h-4"
+              className="mr-2"
             />
             <Breadcrumb>
               <BreadcrumbList>
