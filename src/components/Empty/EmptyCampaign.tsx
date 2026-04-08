@@ -18,17 +18,16 @@ const EmptyCampaign = () => {
           <IconSpeakerphone />
         </EmptyMedia>
 
-        <EmptyTitle>No Campaigns Yet</EmptyTitle>
+        <EmptyTitle>We can&apos;t analyze your ads yet</EmptyTitle>
 
         <EmptyDescription>
-          You haven&apos;t created any campaigns yet. Create a campaign to view
-          analytics
+          Connect your ad account to see where you're wasting money
         </EmptyDescription>
       </EmptyHeader>
 
       <EmptyContent className="flex-row justify-center gap-2">
-        <Button>Create Campaign</Button>
-        <Button variant={"outline"}>Add Account</Button>
+        <Button>Connect Ad Account</Button>
+        <Button variant={"outline"}>Demo Data</Button>
       </EmptyContent>
 
       <Button
@@ -37,7 +36,7 @@ const EmptyCampaign = () => {
         className="text-muted-foreground"
         size={"sm"}
       >
-        <Link to={"/"}>
+        <Link to={"#"}>
           Learn More <IconArrowUpRight />
         </Link>
       </Button>
