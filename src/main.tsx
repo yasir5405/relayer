@@ -9,6 +9,7 @@ import { AuthProvider } from "./context/AuthContext.tsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { TooltipProvider } from "./components/ui/tooltip.tsx";
 import AdAccountProvider from "./context/AdAccountContext.tsx";
+import { Analytics } from "@vercel/analytics/next";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -19,6 +20,7 @@ createRoot(document.getElementById("root")!).render(
             <TooltipProvider>
               <AdAccountProvider>
                 <App />
+                <Analytics />
                 <Toaster
                   richColors
                   toastOptions={{
