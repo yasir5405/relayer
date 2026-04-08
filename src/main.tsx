@@ -9,7 +9,7 @@ import { AuthProvider } from "./context/AuthContext.tsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { TooltipProvider } from "./components/ui/tooltip.tsx";
 import AdAccountProvider from "./context/AdAccountContext.tsx";
-import { Analytics } from "@vercel/analytics/next";
+import { Analytics } from "@vercel/analytics/react";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
