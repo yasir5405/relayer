@@ -148,10 +148,10 @@ const Signup = () => {
       <div className="h-dvh w-full flex items-center justify-center">
         <div className="px-4 py-8 w-full h-full md:h-fit md:w-fit flex items-center flex-col justify-center gap-2">
           <div
-            className="border w-fit dark:border-zinc-700 rounded-lg p-2 cursor-pointer"
+            className="border w-fit rounded-lg cursor-pointer"
             onClick={() => navigate("/")}
           >
-            <Logo size="sm" />
+            <Logo size="md" />
           </div>
 
           <div className="w-full md:min-w-md flex justify-center flex-col py-2 gap-6">
