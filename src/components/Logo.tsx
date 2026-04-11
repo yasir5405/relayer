@@ -1,35 +1,30 @@
 const Logo = ({ size }: { size: "xs" | "sm" | "md" | "lg" }) => {
   const configs = {
-    xs: { widths: [23, 17, 11], h: 5, gap: 2, r: 1.5 },
-    sm: { widths: [37, 27, 17], h: 7, gap: 3, r: 2 },
-    md: { widths: [58, 42, 26], h: 11, gap: 5, r: 3 },
-    lg: { widths: [96, 70, 44], h: 18, gap: 7, r: 6 },
+    xs: { box: 24 },
+    sm: { box: 36 },
+    md: { box: 52 },
+    lg: { box: 80 },
   };
 
-  const opacities = [1, 0.65, 0.3];
   const c = configs[size];
-  const totalH = c.h * 3 + c.gap * 2;
 
   return (
     <svg
-      viewBox={`0 0 ${c.widths[0]} ${totalH}`}
-      width={c.widths[0]}
-      height={totalH}
       xmlns="http://www.w3.org/2000/svg"
+      width={c.box}
+      height={c.box}
+      viewBox="0 0 80 80"
+      role="img"
       style={{ display: "block", flexShrink: 0 }}
     >
-      {c.widths.map((w, i) => (
-        <rect
-          key={i}
-          x={0}
-          y={i * (c.h + c.gap)}
-          width={w}
-          height={c.h}
-          rx={c.r}
-          fill="currentColor"
-          opacity={opacities[i]}
-        />
-      ))}
+      <rect x="0" y="0" width="80" height="80" rx="20" fill="#0F6E56" />
+      <path
+        d="M36,22 C36,16 41,12 47,12 C53,12 58,16 58,22 C58,28 53,32 40,36 C27,40 22,44 22,51 C22,57 27,62 34,62 C41,62 46,57 46,51"
+        fill="none"
+        stroke="white"
+        strokeWidth="6"
+        strokeLinecap="round"
+      />
     </svg>
   );
 };
