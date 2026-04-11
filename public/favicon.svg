@@ -1,10 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" role="img">
-  <rect x="0" y="0" width="80" height="80" rx="20" fill="#0F6E56"/>
-  <path
-    d="M36,22 C36,16 41,12 47,12 C53,12 58,16 58,22 C58,28 53,32 40,36 C27,40 22,44 22,51 C22,57 27,62 34,62 C41,62 46,57 46,51"
-    fill="none"
-    stroke="white"
-    stroke-width="6"
-    stroke-linecap="round"
-  />
+  <g transform="translate(40, 40) rotate(45) scale(0.52)">
+    <path d="M-14,-58 A58,58 0 0,0 -14,58 L-14,-58 Z" fill="#7C3AED"/>
+    <rect x="-8" y="-58" width="16" height="116" rx="3" fill="#7C3AED"/>
+    <polygon points="14,-58 14,58 72,0" fill="#7C3AED"/>
+  </g>
 </svg>
