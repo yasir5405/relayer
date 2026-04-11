@@ -71,7 +71,7 @@ const Login = () => {
       }
 
       localStorage.setItem("access-token", String(res.data?.accessToken));
-      toast.success(res.message);
+      // toast.success(res.message);
       await refreshUser();
       navigate("/dashboard");
     } catch (error) {
@@ -103,7 +103,7 @@ const Login = () => {
         }
 
         localStorage.setItem("access-token", String(res.data?.accessToken));
-        toast.success(res.message);
+        // toast.success(res.message);
         await refreshUser();
         navigate("/dashboard");
       } else {
