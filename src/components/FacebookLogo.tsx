@@ -11,6 +11,7 @@ const FacebookLogo = () => {
       version="1.1"
       xmlSpace="preserve"
       stroke="#1877F2"
+      className="size-5 shrink-0"
     >
       <g id="SVGRepo_bgCarrier" strokeWidth="0" />
 

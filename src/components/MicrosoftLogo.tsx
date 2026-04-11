@@ -6,6 +6,7 @@ const MicrosoftLogo = () => {
       height="800px"
       viewBox="0 0 32 32"
       fill="none"
+      className="size-5 shrink-0"
     >
       <rect x="17" y="17" width="10" height="10" fill="#FEBA08" />
       <rect x="5" y="17" width="10" height="10" fill="#05A6F0" />

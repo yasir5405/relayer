@@ -113,7 +113,7 @@ const Navbar = () => {
   }, [open]);
 
   return (
-    <nav className="-ml-0.5 fixed top-0 left-0 w-full h-16 border-b shadow-2xs flex items-center justify-between px-5 md:px-34 z-20 bg-background">
+    <nav className="-ml-0.5 fixed top-0 left-0 w-full h-16 border-b shadow-2xs flex items-center justify-between px-5 md:px-28 z-20 bg-background">
       {open && (
         <div className="w-full fixed top-16 inset-0 py-8 z-50 dark:bg-black/80 bg-background  dark:backdrop-blur-lg px-5 flex md:hidden flex-col gap-10 overflow-y-auto">
           <div className="w-full flex flex-col items-center justify-center gap-3">
@@ -153,12 +153,26 @@ const Navbar = () => {
         <h1 className="font-heading text-xl font-semibold">Sumptuo</h1>
       </Link>
 
-      <NavbarLinks />
+      <div className="hidden md:flex absolute left-1/2 -translate-x-1/2">
+        <NavbarLinks />
+      </div>
 
       <div className="h-full w-fit flex items-center justify-center gap-3 md:gap-2">
         {/* <AnimatedThemeToggler /> */}
+
         <Button
-          className="hidden md:flex p-4.5 transition-all duration-150 ease-in rounded-sm"
+          variant={"ghost"}
+          className="hidden text-primary hover:border-primary transition-all duration-150 ease-in md:flex hover:text-primary rounded-sm p-4.5 border-primary "
+          asChild
+          size={"lg"}
+        >
+          <Link className="text-sm" to={"/login"}>
+            Log in
+          </Link>
+        </Button>
+
+        <Button
+          className="hidden md:flex p-5 transition-all duration-150 ease-in rounded-sm"
           asChild
           size={"lg"}
         >
@@ -189,17 +203,6 @@ const Navbar = () => {
                 strokeLinejoin="round"
               />
             </svg>
-          </Link>
-        </Button>
-
-        <Button
-          variant={"outline"}
-          className="hidden text-primary hover:border-primary transition-all duration-150 ease-in md:flex hover:text-primary rounded-sm p-4.5 border-primary"
-          asChild
-          size={"lg"}
-        >
-          <Link className="text-sm" to={"/login"}>
-            Log in
           </Link>
         </Button>
 

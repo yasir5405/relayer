@@ -1,125 +1,122 @@
+import { IconSearch } from "@tabler/icons-react";
 import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "../ui/navigation-menu";
-import {
-  featuresSections,
-  integrationsSections,
-  caseStudiesSections,
-  pricingSections,
-} from "@/constants/constants";
-import { IconArrowRight } from "@tabler/icons-react";
-import { Link } from "react-router-dom";
-import { Button } from "../ui/button";
-import { useState } from "react";
-import { navigationMenuTriggerStyle } from "../ui/navigation-menu-trigger-style";
-import MenuSections from "./MenuSections";
+import GoogleLogo from "../GoogleLogo";
+import FacebookLogo from "../FacebookLogo";
+import MicrosoftLogo from "../MicrosoftLogo";
 
 const NavbarLinks = () => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   return (
     <NavigationMenu className="hidden md:block">
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="text-[#061B31] dark:text-muted-foreground text-sm">
-            Features
-          </NavigationMenuTrigger>
-          <NavigationMenuContent className="p-3 bg-background/80 backdrop-blur-xl border border-border/50 shadow-2xl rounded-xl animate-in fade-in zoom-in-95 data-[motion=from-start]:slide-in-from-left-2 data-[motion=from-end]:slide-in-from-right-2 data-[motion=to-start]:slide-out-to-left-2 data-[motion=to-end]:slide-out-to-right-2">
-            <div className="flex flex-col gap-4  p-2 rounded-md min-w-200">
-              <MenuSections
-                sections={featuresSections}
-                hoveredIndex={hoveredIndex}
-                setHoveredIndex={setHoveredIndex}
-              />
+          <NavigationMenuTrigger>Products</NavigationMenuTrigger>
 
-              <div className="w-full py-2 border px-3 rounded-xl flex items-center justify-between">
-                <h1 className="text-xs text-muted-foreground">Try our v1</h1>
+          <NavigationMenuContent>
+            <div className="min-w-100 min-h-80 flex flex-col">
+              {/* Top div */}
+              <div className="min-w-100 h-fit flex">
+                <div className="w-100 h-fit border-r flex flex-col gap-3.5 hover:bg-accent transition-all duration-150 ease-in cursor-pointer  px-4 pt-8 pb-6">
+                  <div className="bg-orange-400 w-fit p-1 rounded-md">
+                    <IconSearch className="size-3.5" />
+                  </div>
 
-                <Button
-                  className="text-xs text-muted-foreground"
-                  variant={"link"}
-                >
-                  <Link to={"/products"}>Get Started</Link>
-                  <IconArrowRight />
-                </Button>
+                  <h1 className="text-sm">Waste Detector</h1>
+                  <p className="text-xs text-muted-foreground leading-3.5">
+                    Find budget leaking to underperforming keywords and
+                    placements
+                  </p>
+
+                  <div className="w-full flex flex-col gap-2 relative">
+                    {/* Each item is its own bordered card */}
+                    {[
+                      {
+                        dot: "bg-red-500",
+                        label: "Brand Campaign - CPC Spike",
+                        badge: "+84%",
+                        badgeClass: "bg-red-100 text-red-700",
+                      },
+                      {
+                        dot: "bg-orange-500",
+                        label: "Retargeting - low CVR",
+                        badge: "Low",
+                        badgeClass: "bg-yellow-100 text-yellow-700",
+                      },
+                      {
+                        dot: "bg-green-500",
+                        label: "High CTR - Great Conversion",
+                        badge: "+12%",
+                        badgeClass: "bg-green-100 text-green-700",
+                      },
+                      {
+                        dot: "bg-red-300",
+                        label: "Display - zero conversions",
+                        badge: "Pause",
+                        badgeClass: "bg-red-100 text-red-700",
+                        faded: true,
+                      },
+                    ].map((item, i) => (
+                      <div
+                        key={i}
+                        className={`flex w-full items-center gap-2 px-3 py-2 rounded-md border  hover:bg-accent transition-colors duration-150 cursor-pointer ${
+                          item.faded ? "opacity-50 pointer-events-none" : ""
+                        }`}
+                      >
+                        <div
+                          className={`w-1.5 h-1.5 rounded-full shrink-0 ${item.dot}`}
+                        />
+                        <span className="flex-1 text-left text-xs truncate">
+                          {item.label}
+                        </span>
+                        <div
+                          className={`px-2 py-0.5 text-xs rounded-full shrink-0 ${item.badgeClass}`}
+                        >
+                          {item.badge}
+                        </div>
+                      </div>
+                    ))}
+
+                    {/* Gradient fade over last item */}
+                    <div className="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+                  </div>
+                </div>
+                <div className=" flex flex-col">
+                  <h1 className="text-sm">Waste Detection</h1>
+                </div>
+                <div className=" flex flex-col">
+                  <h1 className="text-sm">Waste Detection</h1>
+                </div>
+              </div>
+
+              {/* Bottom div */}
+
+              <div className="w-200 flex">
+                {/* Left div */}
+                <div className="flex w-1/2 items-center justify-between cursor-pointer hover:bg-accent py-3 px-4">
+                  <div className="flex flex-col gap-1">
+                    <p className="text-sm">Integrations</p>
+                    <p className="text-muted-foreground  text-xs">
+                      Connect Google, Meta, Microsoft & more
+                    </p>
+                  </div>
+
+                  <div className="flex items-center justify-center gap-1">
+                    <GoogleLogo />
+                    <FacebookLogo />
+                    <MicrosoftLogo />
+                  </div>
+                </div>
+
+                {/* RIght div */}
+                <div className="w-1/2 bg-black"></div>
               </div>
             </div>
           </NavigationMenuContent>
-        </NavigationMenuItem>
-
-        <NavigationMenuItem>
-          <NavigationMenuTrigger className="text-[#061B31] dark:text-muted-foreground text-sm">
-            Integrations
-          </NavigationMenuTrigger>
-
-          <NavigationMenuContent className="p-3 bg-background/80 backdrop-blur-xl border border-border/50 shadow-2xl  rounded-xl animate-in fade-in zoom-in-95 data-[motion=from-start]:slide-in-from-left-2 data-[motion=from-end]:slide-in-from-right-2 data-[motion=to-start]:slide-out-to-left-2 data-[motion=to-end]:slide-out-to-right-2">
-            <div className="flex flex-col gap-4 p-2 rounded-md min-w-200">
-              <MenuSections
-                sections={integrationsSections}
-                hoveredIndex={hoveredIndex}
-                setHoveredIndex={setHoveredIndex}
-              />
-
-              <div className="w-full py-2 border px-3 rounded-xl flex items-center justify-between">
-                <h1 className="text-xs text-muted-foreground">Try our v1</h1>
-
-                <Button
-                  className="text-xs text-muted-foreground"
-                  variant={"link"}
-                >
-                  <Link to={"/products"}>Get Started</Link>
-                  <IconArrowRight />
-                </Button>
-              </div>
-            </div>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-
-        <NavigationMenuItem>
-          <NavigationMenuTrigger className="text-[#061B31] dark:text-muted-foreground text-sm">
-            Case Studies
-          </NavigationMenuTrigger>
-
-          <NavigationMenuContent className="p-3 bg-background/80 backdrop-blur-xl border border-border/50 shadow-2xl  rounded-xl animate-in fade-in zoom-in-95 data-[motion=from-start]:slide-in-from-left-2 data-[motion=from-end]:slide-in-from-right-2 data-[motion=to-start]:slide-out-to-left-2 data-[motion=to-end]:slide-out-to-right-2">
-            <div className="min-w-200 p-2 rounded-md">
-              <MenuSections
-                sections={caseStudiesSections}
-                hoveredIndex={hoveredIndex}
-                setHoveredIndex={setHoveredIndex}
-              />
-            </div>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-
-        <NavigationMenuItem>
-          <NavigationMenuTrigger className="text-[#061B31] dark:text-muted-foreground text-sm">
-            Pricing
-          </NavigationMenuTrigger>
-
-          <NavigationMenuContent className="p-3 bg-background/80 backdrop-blur-xl border border-border/50 shadow-2xl  rounded-xl animate-in fade-in zoom-in-95 data-[motion=from-start]:slide-in-from-left-2 data-[motion=from-end]:slide-in-from-right-2 data-[motion=to-start]:slide-out-to-left-2 data-[motion=to-end]:slide-out-to-right-2">
-            <div className="min-w-200 p-2 rounded-md">
-              <MenuSections
-                sections={pricingSections}
-                hoveredIndex={hoveredIndex}
-                setHoveredIndex={setHoveredIndex}
-              />
-            </div>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-
-        <NavigationMenuItem>
-          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link
-              to="/report"
-              className="text-[#061B31] dark:text-muted-foreground text-sm leading-none"
-            >
-              Ad Audit
-            </Link>
-          </NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
