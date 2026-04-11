@@ -134,32 +134,38 @@ const Navbar = () => {
         </div>
       )}
 
-      <div className="flex h-full w-fit items-center justify-center gap-6">
-        <Link
-          to={"/"}
-          className="flex h-full w-fit items-center justify-center gap-2"
-        >
-          <Logo size="xs" />
+      <Link
+        to={"/"}
+        className="flex h-full w-fit items-center justify-center gap-2"
+      >
+        <Logo size="xs" />
 
-          <h1 className="font-heading text-xl font-semibold">Sumptuo</h1>
-        </Link>
+        <h1 className="font-heading text-xl font-semibold">Sumptuo</h1>
+      </Link>
 
-        <NavbarLinks />
-      </div>
+      <NavbarLinks />
 
       <div className="h-full w-fit flex items-center justify-center gap-3 md:gap-2">
-        <AnimatedThemeToggler />
+        {/* <AnimatedThemeToggler /> */}
         <Button
           variant={"ghost"}
           className="hidden md:flex text-muted-foreground"
           asChild
         >
-          <Link to={"/login"}>Log in</Link>
+          <Link className="text-sm" to={"/login"}>
+            Log in
+          </Link>
         </Button>
 
-        <InteractiveHoverButton className="font-heading hidden md:flex">
+        <Button className="hidden md:flex" asChild>
+          <Link className="text-sm" to={"/login"}>
+            Sign up
+          </Link>
+        </Button>
+
+        {/* <InteractiveHoverButton className="font-heading hidden md:flex">
           Get Started
-        </InteractiveHoverButton>
+        </InteractiveHoverButton> */}
 
         <AnimatePresence mode="wait">
           {open ? (
