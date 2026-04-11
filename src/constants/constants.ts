@@ -1,57 +1,110 @@
-export const toolsSections = [
+export const featuresSections = [
   {
-    title: "Core",
+    title: "Ad Analysis",
     items: [
       {
-        name: "Dashboard",
-        description: "See your income, expenses, and savings at a glance",
+        name: "Performance Scanner",
+        description: "Instantly identify your underperforming ads",
+        href: "/features/scanner",
+      },
+      {
+        name: "Waste Detection",
+        description: "Find exactly where your budget is being drained",
+        href: "/features/waste",
+      },
+    ],
+  },
+  {
+    title: "Insights",
+    items: [
+      {
+        name: "AI Recommendations",
+        description: "Get actionable steps to improve your ROAS",
+        href: "/features/recommendations",
+      },
+      {
+        name: "Spend Analysis",
+        description: "See which campaigns are worth keeping",
+        href: "/features/analysis",
+      },
+    ],
+  },
+  {
+    title: "Management",
+    items: [
+      {
+        name: "Campaign Dashboard",
+        description: "All your Google and Meta campaigns in one place",
         href: "/dashboard",
       },
       {
-        name: "Transactions",
-        description: "Track and manage all your spending",
-        href: "/transactions",
+        name: "Budget Controls",
+        description: "Set rules to pause or cap underperforming ads",
+        href: "/features/controls",
       },
       {
-        name: "Budgets",
-        description: "Set limits and stay in control of your money",
-        href: "/budgets",
-      },
-    ],
-  },
-  {
-    title: "Planning",
-    items: [
-      {
-        name: "Goals",
-        description: "Save for what matters, with clear progress",
-        href: "/goals",
-      },
-      {
-        name: "Forecast",
-        description: "See where your money is going next",
-        href: "/forecast",
-      },
-    ],
-  },
-  {
-    title: "Import & Data",
-    items: [
-      {
-        name: "CSV Import",
-        description: "Upload bank statements in seconds",
-        href: "/import",
-      },
-      {
-        name: "Export Data",
-        description: "Download your data anytime",
-        href: "/settings/export",
+        name: "Alerts",
+        description: "Get notified before ad spend goes to waste",
+        href: "/features/alerts",
       },
     ],
   },
 ];
 
-export const companySections = [
+export const integrationsSections = [
+  {
+    title: "Ad Platforms",
+    items: [
+      {
+        name: "Google Ads",
+        description: "Connect your Google Ads account in seconds",
+        href: "/integrations/google-ads",
+      },
+      {
+        name: "Meta Ads",
+        description: "Sync Facebook and Instagram ad data",
+        href: "/integrations/meta-ads",
+      },
+    ],
+  },
+  {
+    title: "Data",
+    items: [
+      {
+        name: "Export Reports",
+        description: "Download campaign insights as CSV or PDF",
+        href: "/integrations/export",
+      },
+      {
+        name: "API Access",
+        description: "Plug Sumptuo data into your own tools",
+        href: "/integrations/api",
+      },
+    ],
+  },
+];
+
+export const caseStudiesSections = [
+  {
+    title: "By Industry",
+    items: [
+      {
+        name: "E-commerce",
+        description: "How DTC brands cut wasted ad spend by 40%",
+        href: "/case-studies/ecommerce",
+      },
+      {
+        name: "SaaS",
+        description: "Improving ROAS for subscription businesses",
+        href: "/case-studies/saas",
+      },
+      {
+        name: "Agencies",
+        description: "Managing ad spend across multiple clients",
+        href: "/case-studies/agencies",
+      },
+    ],
+  },
   {
     title: "Company",
     items: [
@@ -61,130 +114,47 @@ export const companySections = [
         href: "/about",
       },
       {
-        name: "Philosophy",
-        description: "Privacy-first, simple, and honest finance",
-        href: "/philosophy",
-      },
-    ],
-  },
-  {
-    title: "Connect",
-    items: [
-      {
         name: "Contact",
         description: "Reach out for support or feedback",
         href: "/contact",
       },
-      {
-        name: "Support",
-        description: "Help with using Sumptuo",
-        href: "/support",
-      },
-    ],
-  },
-  {
-    title: "Legal",
-    items: [
-      {
-        name: "Privacy Policy",
-        description: "We don’t sell your data. Ever.",
-        href: "/privacy",
-      },
-      {
-        name: "Terms of Service",
-        description: "Simple and fair usage terms",
-        href: "/terms",
-      },
     ],
   },
 ];
 
-export const productSections = [
+export const pricingSections = [
   {
-    title: "Tracking",
+    title: "Plans",
     items: [
       {
-        name: "Manual Tracking",
-        description: "Log income and expenses effortlessly",
-        href: "/transactions",
+        name: "Free Audit",
+        description: "Scan your ads and see waste for free",
+        href: "/pricing#free",
       },
       {
-        name: "Smart Categories",
-        description: "Organized spending with clean categories",
-        href: "/categories",
+        name: "Pro",
+        description: "Full access to controls, alerts, and AI insights",
+        href: "/pricing#pro",
+      },
+      {
+        name: "Agency",
+        description: "Manage multiple ad accounts under one roof",
+        href: "/pricing#agency",
       },
     ],
   },
   {
-    title: "Insights",
-    items: [
-      {
-        name: "AI Coaching",
-        description: "Understand your money and what to do next",
-        href: "/dashboard#insights",
-      },
-      {
-        name: "Spending Analysis",
-        description: "See where your money actually goes",
-        href: "/dashboard#analysis",
-      },
-    ],
-  },
-  {
-    title: "Planning",
-    items: [
-      {
-        name: "Budgets",
-        description: "Set limits and track progress",
-        href: "/budgets",
-      },
-      {
-        name: "Forecasting",
-        description: "Project your future balance",
-        href: "/forecast",
-      },
-      {
-        name: "Goals",
-        description: "Plan and achieve your savings targets",
-        href: "/goals",
-      },
-    ],
-  },
-];
-
-export const resourcesSections = [
-  {
-    title: "Learn",
+    title: "Resources",
     items: [
       {
         name: "Documentation",
-        description: "How to use Sumptuo effectively",
-        href: "/resources/docs",
+        description: "How to get the most out of Sumptuo",
+        href: "/docs",
       },
-      {
-        name: "Guides",
-        description: "Master budgeting and saving",
-        href: "/resources/guides",
-      },
-    ],
-  },
-  {
-    title: "Updates",
-    items: [
       {
         name: "Changelog",
-        description: "Track product improvements",
-        href: "/resources/changelog",
-      },
-    ],
-  },
-  {
-    title: "Content",
-    items: [
-      {
-        name: "Blog",
-        description: "Money insights, habits, and ideas",
-        href: "/resources/blog",
+        description: "See what's new and what's improved",
+        href: "/changelog",
       },
     ],
   },

@@ -8,10 +8,10 @@ import NavbarLinks from "./NavbarLinks";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import {
-  companySections,
-  productSections,
-  resourcesSections,
-  toolsSections,
+  featuresSections,
+  integrationsSections,
+  caseStudiesSections,
+  pricingSections,
 } from "@/constants/constants";
 import {
   Accordion,
@@ -35,7 +35,7 @@ const MobileProductsAccordion = ({
   const navigate = useNavigate();
   return (
     <div className="flex w-full flex-col gap-4 font-heading">
-      <h1 className="dark:text-muted-foreground text-sm">Product</h1>
+      <h1 className="dark:text-muted-foreground text-sm">Features</h1>
 
       <Accordion type="single" collapsible className="w-full">
         {section.map((group, index) => (
@@ -82,14 +82,23 @@ const MobileNavSections = ({
   }[];
   title: string;
 }) => {
+  const navigate = useNavigate();
   return (
     <div className="flex w-full flex-col gap-4 font-heading">
       <h1 className="dark:text-muted-foreground text-sm">{title}</h1>
 
       <div className="w-full flex flex-col gap-2.5">
-        {section.map((section) => (
-          <h1 className="font-medium text-2xl">{section.title}</h1>
-        ))}
+        {section.map((group) =>
+          group.items.map((item) => (
+            <h1
+              key={item.name}
+              onClick={() => navigate(item.href)}
+              className="font-medium text-2xl cursor-pointer py-1 rounded-md hover:bg-white/5 transition-colors"
+            >
+              {item.name}
+            </h1>
+          )),
+        )}
       </div>
     </div>
   );
@@ -123,10 +132,16 @@ const Navbar = () => {
               Get Started
             </Button>
           </div>
-          <MobileProductsAccordion section={productSections} />
-          <MobileNavSections section={toolsSections} title="Tools" />
-          <MobileNavSections section={companySections} title="Company" />
-          <MobileNavSections section={resourcesSections} title="Resources" />
+          <MobileProductsAccordion section={featuresSections} />
+          <MobileNavSections
+            section={integrationsSections}
+            title="Integrations"
+          />
+          <MobileNavSections
+            section={caseStudiesSections}
+            title="Case Studies"
+          />
+          <MobileNavSections section={pricingSections} title="Pricing" />
 
           <h1 className="font-medium text-2xl">Report an issue</h1>
         </div>
@@ -143,7 +158,7 @@ const Navbar = () => {
       <div className="h-full w-fit flex items-center justify-center gap-3 md:gap-2">
         {/* <AnimatedThemeToggler /> */}
         <Button
-          className="hidden md:flex p-5 transition-all duration-150 ease-in rounded-sm"
+          className="hidden md:flex p-4.5 transition-all duration-150 ease-in rounded-sm"
           asChild
           size={"lg"}
         >
@@ -179,7 +194,7 @@ const Navbar = () => {
 
         <Button
           variant={"outline"}
-          className="hidden hover:text-primary hover:border-primary transition-all duration-150 ease-in md:flex text-muted-foreground p-5"
+          className="hidden text-primary hover:border-primary transition-all duration-150 ease-in md:flex hover:text-primary rounded-sm p-4.5 border-primary"
           asChild
           size={"lg"}
         >
